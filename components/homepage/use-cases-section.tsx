@@ -8,37 +8,37 @@ const useCases = [
   {
     role: "SEO Optimization",
     description: "Boost your search rankings and drive organic traffic to your brand.",
-    image: "/one.svg",
+    image: "/usecases/seo.svg",
     details: "Our SEO strategies are data-driven. We provide comprehensive keyword research, on-page optimization, and high-quality link building to ensure your website ranks at the top of search engine results, maximizing your visibility and conversion rates."
   },
   {
     role: "Mobile Development",
     description: "Engage users on the go with responsive, high-performance mobile apps.",
-    image: "/one.svg",
+    image: "/usecases/mobile.svg",
     details: "We build native and cross-platform mobile applications tailored to your business needs. From beautifully designed interfaces to robust backend integrations, our mobile solutions ensure a seamless and intuitive user experience across all devices."
   },
   {
     role: "Performance",
     description: "Optimize load times and ensure your applications run at lightning speed.",
-    image: "/one.svg",
+    image: "/usecases/performance.svg",
     details: "Speed is crucial for user retention. Our performance tuning includes code splitting, image optimization, caching strategies, and server-side rendering to deliver ultra-fast digital experiences that keep your audience engaged."
   },
   {
     role: "Web Development",
     description: "Build robust, scalable, and secure web applications.",
-    image: "/one.svg",
+    image: "/usecases/web.svg",
     details: "Our web development process utilizes the latest frontend and backend technologies. We create custom, responsive websites and complex web platforms that are built to scale alongside your growing business."
   },
   {
     role: "UI/UX Design",
     description: "Create stunning interfaces crafted for intuitive user journeys.",
-    image: "/one.svg",
+    image: "/usecases/uiux.svg",
     details: "We map out user journeys and craft digital interfaces that are not only visually appealing but also highly functional. Our UI/UX design process focuses on maximizing usability and ensuring every interaction is meaningful and satisfying."
   },
   {
     role: "eCommerce Solutions",
     description: "Drive sales with secure, feature-rich online storefronts.",
-    image: "/one.svg",
+    image: "/usecases/ecommerce.svg",
     details: "Transform your retail business with our tailored eCommerce solutions. We integrate secure payment gateways, inventory management, and personalized shopping experiences designed to turn visitors into loyal customers."
   },
 ]
@@ -99,18 +99,10 @@ export default function UseCasesSection() {
 
               {/* Content */}
               <div className="p-2 md:p-4 flex flex-col flex-1">
-                <div className="space-y-0.5 mb-3">
                   <h3 className="text-sm md:text-lg font-semibold text-gray-900 leading-tight group-hover:text-primary transition-colors">{useCase.role}</h3>
                   <p className="text-neutral-500 text-[11px] md:text-sm">
                     {useCase.description}
                   </p>
-                </div>
-                
-                <div className="mt-auto pt-2 border-t border-gray-50">
-                  <button className="text-[10px] md:text-[14px] font-semibold flex items-center gap-2 cursor-pointer hover:text-primary transition-colors">
-                    See {useCase.role} details ➔
-                  </button>
-                </div>
               </div>
             </div>
           ))}
@@ -131,7 +123,7 @@ export default function UseCasesSection() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-lg overflow-hidden rounded-md bg-white p-6 shadow-2xl"
+              className="relative w-full max-w-lg overflow-hidden rounded-sm bg-white p-4 md:p-6 shadow-xl"
             >
               <button
                 onClick={() => setSelectedService(null)}
@@ -144,19 +136,19 @@ export default function UseCasesSection() {
                 <img
                   src={selectedService.image}
                   alt={selectedService.role}
-                  className="h-12 w-12 object-contain"
+                  className="h-16 w-16 object-contain"
                 />
               </div>
               
-              <h3 className="mb-2 text-2xl font-bold text-gray-900">{selectedService.role}</h3>
-              <p className="text-neutral-600 leading-relaxed">
+              <h3 className="mb-2 text-lg md:text-2xl font-bold text-gray-900">{selectedService.role}</h3>
+              <p className="text-neutral-600 leading-relaxed text-sm md:text-base">
                 {selectedService.details}
               </p>
               
               <div className="mt-6 flex justify-end">
                 <button
                   onClick={() => setSelectedService(null)}
-                  className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90 transition-colors"
+                  className="rounded-sm bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90 transition-colors cursor-pointer"
                 >
                   Close
                 </button>
