@@ -11,11 +11,11 @@ const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" })
 export const metadata: Metadata = {
   metadataBase: new URL("https://nexusdweb.com"),
   title: {
-    default: "NEXUSDWEB | Premium Web Design & Development Agency",
-    template: "%s | NEXUSDWEB",
+    default: "NexusdWeb | Premium Web Design & Development Agency",
+    template: "%s | NexusdWeb",
   },
   description:
-    "Elevate your digital presence with NEXUSDWEB. We specialize in premium web design, high-performance development, UI/UX strategy, and bespoke SEO solutions for ambitious brands.",
+    "Elevate your digital presence with NexusdWeb. We specialize in premium web design, high-performance development, UI/UX strategy, and bespoke SEO solutions for ambitious brands.",
   keywords: [
     "premium web design",
     "custom web development",
@@ -25,11 +25,11 @@ export const metadata: Metadata = {
     "Next.js agency",
     "high-performance websites",
     "digital growth agency",
-    "NEXUSDWEB",
+    "NexusdWeb",
   ],
-  authors: [{ name: "NEXUSDWEB" }],
-  creator: "NEXUSDWEB",
-  publisher: "NEXUSDWEB",
+  authors: [{ name: "NexusdWeb" }],
+  creator: "NexusdWeb",
+  publisher: "NexusdWeb",
   formatDetection: {
     email: false,
     address: false,
@@ -44,24 +44,24 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://nexusdweb.com",
-    siteName: "NEXUSDWEB | Premium Web Solutions",
-    title: "NEXUSDWEB | Premium Web Design & Development Agency",
+    siteName: "NexusdWeb | Premium Web Solutions",
+    title: "NexusdWeb | Premium Web Design & Development Agency",
     description:
-      "NEXUSDWEB is a premium digital agency specialized in crafting high-performance websites, bespoke designs, and strategic digital experiences.",
+      "NexusdWeb is a premium digital agency specialized in crafting high-performance websites, bespoke designs, and strategic digital experiences.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "NEXUSDWEB - Premium Web Solutions Agency",
+        alt: "NexusdWeb - Premium Web Solutions Agency",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "NEXUSDWEB | Bespoke Web Design & Tech Agency",
+    title: "NexusdWeb | Bespoke Web Design & Tech Agency",
     description:
-      "We build premium digital experiences. From high-end web design to custom development, NEXUSDWEB helps brands dominate the digital landscape.",
+      "We build premium digital experiences. From high-end web design to custom development, NexusdWeb helps brands dominate the digital landscape.",
     images: ["/og-image.png"],
     creator: "@nexusdweb",
   },
