@@ -11,7 +11,7 @@ const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" })
 export const metadata: Metadata = {
   metadataBase: new URL("https://nexusdweb.com"),
   title: {
-    default: "NexusdWeb | Premium Web Design & Development Agency",
+    default: "NexusdWeb",
     template: "%s | NexusdWeb",
   },
   description:

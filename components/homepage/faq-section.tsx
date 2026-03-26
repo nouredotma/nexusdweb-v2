@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { ChevronDown } from "lucide-react"
+import { Plus } from "lucide-react"
 
 const FAQs = [
   {
@@ -103,7 +103,7 @@ export default function FAQSection() {
                 <span className={`font-medium text-sm md:text-base transition-colors duration-200 leading-tight ${
                   openIndex === index ? "text-primary" : "text-foreground group-hover:text-primary"
                 }`}>{faq.question}</span>
-                <ChevronDown
+                <Plus
                   className={`w-4 h-4 transition-all duration-200 shrink-0 ${
                     openIndex === index ? "rotate-180 text-primary" : "text-muted-foreground group-hover:text-primary"
                   }`}
