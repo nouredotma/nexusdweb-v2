@@ -185,7 +185,7 @@ export default function Footer() {
               <li>
                 <span className="text-white/70 font-medium flex items-center gap-0 whitespace-nowrap">
                   <ChevronRight size={14} className="-ml-1 shrink-0" />
-                  <span>+212 6 00 00 00 00</span>
+                  <span>+212 6 13 77 48 95</span>
                 </span>
               </li>
               <li>
@@ -200,7 +200,7 @@ export default function Footer() {
               <li>
                 <span className="text-white/70 font-medium flex items-center gap-0 whitespace-nowrap">
                   <ChevronRight size={14} className="-ml-1 shrink-0" />
-                  <span>Casablanca, Morocco</span>
+                  <span>Marrakech, Morocco</span>
                 </span>
               </li>
             </ul>
