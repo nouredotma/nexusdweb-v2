@@ -3,6 +3,16 @@
 import { ChevronRight } from "lucide-react";
 
 export default function Footer() {
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
+      e.preventDefault()
+      const destination = document.querySelector(href)
+      if (destination) {
+        destination.scrollIntoView({ behavior: "smooth" })
+      }
+    }
+  }
+
   return (
     <footer className="w-full px-2 md:px-8 pb-2 md:pb-8">
       <div className="max-w-full mx-auto bg-primary text-white rounded-xl px-6 md:px-16 pt-16 pb-0 overflow-hidden">
@@ -17,6 +27,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
+                  onClick={(e) => handleScroll(e, "#")}
                   className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
                 >
                   <ChevronRight size={14} className="-ml-1" />
@@ -25,7 +36,18 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#services"
+                  href="#features"
+                  onClick={(e) => handleScroll(e, "#features")}
+                  className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
+                >
+                  <ChevronRight size={14} className="-ml-1" />
+                  <span>Our Work</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#use-cases"
+                  onClick={(e) => handleScroll(e, "#use-cases")}
                   className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
                 >
                   <ChevronRight size={14} className="-ml-1" />
@@ -35,6 +57,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#testimonials"
+                  onClick={(e) => handleScroll(e, "#testimonials")}
                   className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
                 >
                   <ChevronRight size={14} className="-ml-1" />
@@ -44,6 +67,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#pricing"
+                  onClick={(e) => handleScroll(e, "#pricing")}
                   className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
                 >
                   <ChevronRight size={14} className="-ml-1" />
@@ -53,6 +77,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#contact"
+                  onClick={(e) => handleScroll(e, "#contact")}
                   className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
                 >
                   <ChevronRight size={14} className="-ml-1" />
@@ -70,7 +95,18 @@ export default function Footer() {
             <ul className="space-y-3 text-sm p-0 list-none">
               <li>
                 <a
+                  href="#features"
+                  onClick={(e) => handleScroll(e, "#features")}
+                  className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
+                >
+                  <ChevronRight size={14} className="-ml-1" />
+                  <span>Our Work</span>
+                </a>
+              </li>
+              <li>
+                <a
                   href="#faq"
+                  onClick={(e) => handleScroll(e, "#faq")}
                   className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
                 >
                   <ChevronRight size={14} className="-ml-1" />

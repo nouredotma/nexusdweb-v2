@@ -5,48 +5,58 @@ import { useState } from "react"
 const features = [
   {
     id: 1,
-    category: "Discovery",
-    mobileCategory: "Discover",
-    title: "We listen before we build.",
-    description: "Every great project starts with understanding. We dive deep into your goals, audience, and vision to define a clear roadmap before a single pixel is placed.",
-    bgColor: "bg-[#a3e3fb]",
-    borderColor: "border-[#7fd2f7]",
+    category: "SaaS Dashboard",
+    mobileCategory: "SaaS",
+    title: "NexFlow SaaS Dashboard",
+    description: "A comprehensive analytics and management solution built for modern SaaS platforms. Featuring real-time data visualization, user behavioral tracking, and a seamless administrative interface to drive business growth.",
+    bgColor: "bg-[#f0f6fe]",
+    borderColor: "border-[#226fd3]/20",
     textColor: "text-gray-900",
     image: "https://sanity-images.imgix.net/production/59aa54ee8debeaf39514cd2620684dc08f9f2196-1096x720.png?w=1096&auto=format%2Ccompress",
   },
   {
     id: 2,
-    category: "Design",
-    mobileCategory: "Design",
-    title: "Crafted to captivate your audience.",
-    description:
-      "From wireframes to high-fidelity mockups, we design interfaces that are visually stunning and intuitively easy to use — perfectly aligned with your brand.",
-    bgColor: "bg-[#ffd8ad]",
-    borderColor: "border-[#ffc48c]",
+    category: "Corporate Business",
+    mobileCategory: "Corporate",
+    title: "Stellar Corp Digital Presence",
+    description: "A high-performance corporate website designed to establish authority and trust. We focused on optimized conversion funnels, professional identity branding, and a sleek, fast-loading interface for global business.",
+    bgColor: "bg-[#e8f1ff]",
+    borderColor: "border-[#226fd3]/20",
     textColor: "text-gray-900",
     image: "https://sanity-images.imgix.net/production/337c35b10cc97333bd0611c031d69593f725d343-1096x720.png?w=1096&auto=format%2Ccompress",
   },
   {
     id: 3,
-    category: "Development",
-    mobileCategory: "Build",
-    title: "Clean code. Pixel-perfect results.",
-    description: "We bring designs to life with modern, scalable technology. Fast load times, responsive layouts, and seamless functionality — built to perform.",
-    bgColor: "bg-[#fff3a5]",
-    borderColor: "border-[#fee56a]",
+    category: "E-commerce Store",
+    mobileCategory: "E-comm",
+    title: "LuxCart E-commerce Platform",
+    description: "An end-to-end e-commerce experience with a focus on user journey and sales conversion. Featuring lightning-fast checkout, mobile-first product exploration, and a premium aesthetic that elevates the shopping experience.",
+    bgColor: "bg-[#f0f6fe]",
+    borderColor: "border-[#226fd3]/20",
     textColor: "text-gray-900",
     image: "https://sanity-images.imgix.net/production/7acca19bc630587b7316556738ba95689d1d0802-1096x720.png?w=1096&auto=format%2Ccompress",
   },
   {
     id: 4,
-    category: "Launch & Support",
-    mobileCategory: "Launch",
-    title: "Go live with confidence.",
-    description: "We handle deployment, testing, and optimization so your launch is flawless. And after that, we stay by your side with ongoing support and improvements.",
-    bgColor: "bg-[#dec8fd]",
-    borderColor: "border-[#ccabfd]",
+    category: "Moroccan Association",
+    mobileCategory: "Non-Profit",
+    title: "Atlas Community Portal",
+    description: "Empowering local Moroccan associations with a digital platform to coordinate volunteer work and manage community impact. The design blends modern web standards with subtle cultural aesthetics.",
+    bgColor: "bg-[#e8f1ff]",
+    borderColor: "border-[#226fd3]/20",
     textColor: "text-gray-900",
     image: "https://sanity-images.imgix.net/production/05fc311fc36487383ebee7ee405574a283e408f4-1644x1080.png?w=1096&auto=format%2Ccompress",
+  },
+  {
+    id: 5,
+    category: "Traveling Service",
+    mobileCategory: "Travel",
+    title: "Sahara Wings Travel Agency",
+    description: "A vibrant and intuitive booking platform that simplifies trip planning for explorers. We integrated immersive high-quality imagery and a modern brand identity to inspire global travelers and adventurers.",
+    bgColor: "bg-[#f0f6fe]",
+    borderColor: "border-[#226fd3]/20",
+    textColor: "text-gray-900",
+    image: "https://sanity-images.imgix.net/production/59aa54ee8debeaf39514cd2620684dc08f9f2196-1096x720.png?w=1096&auto=format%2Ccompress",
   },
 ]
 
@@ -56,7 +66,7 @@ export default function FeaturesSection() {
   const currentFeature = features.find((f) => f.id === activeFeature) || features[0]
 
   return (
-    <section className="w-full py-10">
+    <section id="features" className="w-full py-10 scroll-mt-20">
       <div className="container mx-auto px-3">
         {/* Tab Navigation */}
         <div className="flex flex-wrap items-center justify-center gap-0 md:gap-1 mb-3">
@@ -87,7 +97,7 @@ export default function FeaturesSection() {
             {/* Left Content */}
             <div className="flex flex-col justify-start md:justify-between">
               {/* Category and Title Group */}
-              <div className="space-y-2">
+              <div className="space-y-6">
                 <span className="inline-block px-3 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider bg-black/10">
                   {currentFeature.category}
                 </span>

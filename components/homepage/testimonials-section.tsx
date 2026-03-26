@@ -206,7 +206,7 @@ function ReviewCard({ review, index }: { review: Review; index: number }) {
         </p>
 
         {/* Google attribution */}
-        <div className="flex items-center gap-1.5 mt-auto pt-3 border-t border-gray-50">
+        <div className="flex items-center gap-1.5 mt-auto pt-10 border-t border-gray-50">
           <GoogleLogo className="w-3.5 h-3.5" />
           <span className="text-[10px] sm:text-[11px] text-gray-400 font-medium">
             Posted on Google
@@ -219,7 +219,7 @@ function ReviewCard({ review, index }: { review: Review; index: number }) {
 
 export default function TestimonialsSection() {
   return (
-    <section className="w-full py-10 bg-background overflow-hidden">
+    <section id="testimonials" className="w-full py-10 bg-background overflow-hidden scroll-mt-20">
       <div className="w-full">
         <h2 className="text-xl font-bold md:text-3xl lg:text-4xl text-center mb-4 sm:mb-6 text-balance flex items-center justify-center">
           Don&apos;t just take our word for it

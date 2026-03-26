@@ -92,8 +92,8 @@ export default function Header() {
   }
 
   const navItems: NavItem[] = [
-    { name: "Services", href: "#services" },
-    { name: "Use Cases", href: "#use-cases" },
+    { name: "Our Work", href: "#features" },
+    { name: "Services", href: "#use-cases" },
     { name: "Pricing", href: "#pricing" },
     { name: "Testimonials", href: "#testimonials" },
     { name: "FAQ", href: "#faq" },
