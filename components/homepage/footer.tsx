@@ -215,11 +215,11 @@ export default function Footer() {
         </div>
 
         {/* Row 3: Copyright with top border */}
-        <div className="border-t border-white/20 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="border-t border-white/20 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-white/70 text-sm">
             © {new Date().getFullYear()} NexusDWeb. All rights reserved.
           </p>
-          <div className="flex items-center gap-2 text-sm text-white/70">
+          <div className="items-center gap-2 text-sm text-white/70 hidden md:inline-flex">
             <span className="w-2 h-2 bg-emerald-400 rounded-full inline-block animate-pulse" />
             <span>All Systems Operational</span>
           </div>
