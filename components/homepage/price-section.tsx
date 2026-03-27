@@ -48,7 +48,7 @@ const TIERS: PricingTier[] = [
   },
   {
     name: "Enterprise",
-    price: 1200,
+    price: "Custom",
     description: "For large-scale operations",
     features: [
       "Everything in Pro",

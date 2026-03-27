@@ -1,9 +1,12 @@
 "use client"
 
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { AnimatedArrow } from "@/components/ui/animated-arrow"
+import { Bot } from "lucide-react"
+import { AiAssistantModal } from "@/components/homepage/ai-assistant-modal"
 
 import {
   Tooltip,
@@ -13,6 +16,8 @@ import {
 } from "@/components/ui/tooltip"
 
 export default function HeroSection() {
+  const [aiModalOpen, setAiModalOpen] = useState(false)
+
   return (
     <TooltipProvider delayDuration={0}>
       <section className="relative w-full h-svh flex items-center justify-center overflow-hidden">
@@ -104,7 +109,40 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Contact Links */}
+        {/* Nexus AI Assistant Button — Bottom Left */}
+        <div className="absolute bottom-3 left-3 md:bottom-6 md:left-6 z-20">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <motion.button
+                onClick={() => setAiModalOpen(true)}
+                className="group relative flex items-center justify-center w-12 h-12 md:w-18 md:h-18 bg-white rounded-sm md:rounded-lg transition-all duration-300 cursor-pointer overflow-hidden border border-neutral-100"
+                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05 }}
+                aria-label="Ask Nexus AI"
+              >
+                {/* Google Color Ring Effect */}
+                <div className="absolute inset-0 p-[2.5px] overflow-hidden rounded-[inherit] pointer-events-none">
+                  <div 
+                    className="absolute -inset-full animate-[spin_6s_linear_infinite]"
+                    style={{
+                      background: "conic-gradient(from 0deg, #4285F4 0deg, #4285F4 90deg, #EA4335 90deg, #EA4335 180deg, #FBBC05 180deg, #FBBC05 270deg, #34A853 270deg, #34A853 360deg)"
+                    }}
+                  />
+                  <div className="absolute inset-[2.5px] bg-white rounded-xs md:rounded-md z-0" />
+                </div>
+
+                <div className="relative z-10 text-black">
+                  <Bot className="w-7 h-7 md:w-8 md:h-8" />
+                </div>
+              </motion.button>
+            </TooltipTrigger>
+            <TooltipContent side="top" sideOffset={1}>
+              Ask Nexus AI
+            </TooltipContent>
+          </Tooltip>
+        </div>
+
+        {/* Contact Links — Bottom Right */}
         <div className="absolute bottom-3 right-3 md:bottom-6 md:right-6 z-20 flex flex-row items-center gap-2">
           <Tooltip>
             <TooltipTrigger asChild>
@@ -141,6 +179,9 @@ export default function HeroSection() {
             </TooltipContent>
           </Tooltip>
         </div>
+
+        {/* AI Assistant Modal */}
+        <AiAssistantModal open={aiModalOpen} onOpenChange={setAiModalOpen} />
       </section>
     </TooltipProvider>
   )

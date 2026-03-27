@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 
 export interface PricingTier {
   name: string
-  price: number
+  price: number | string
   description: string
   features: string[]
   limitations?: string[]
@@ -84,8 +84,12 @@ export function PricingCard({ tier }: PricingCardProps) {
         </div>
 
         <div className="mb-1 flex items-baseline gap-1">
-          <div className="text-4xl font-extrabold tracking-tight flex items-baseline">
-            <span>${price}</span>
+          <div className="text-4xl font-extrabold tracking-tight flex items-baseline leading-none">
+            {typeof price === "number" ? (
+              <span>${price}</span>
+            ) : (
+              <span>{price}</span>
+            )}
           </div>
         </div>
 

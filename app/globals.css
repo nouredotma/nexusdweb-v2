@@ -157,3 +157,42 @@
   scrollbar-width: thin;
   scrollbar-color: #226fd3 #ffffff;
 }
+
+/* AI Chat Scrollbar — Light mode */
+.ai-chat-scrollbar::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.ai-chat-scrollbar::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.ai-chat-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #d1d5db !important;
+  border-radius: 20px !important;
+  border: none !important;
+}
+
+.ai-chat-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #9ca3af !important;
+}
+
+.ai-chat-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db transparent;
+}
+
+/* Shimmer animation for AI input focus */
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Prevent scroll when AI modal is open */
+.no-scroll {
+  overflow: hidden !important;
+}
