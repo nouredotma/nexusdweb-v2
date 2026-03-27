@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef } from "react"
+import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
 
 const steps = [
@@ -9,24 +10,30 @@ const steps = [
     title: "Discovery & Brief",
     description:
       "We start by understanding your vision, goals, and audience. Through in-depth research and strategic planning, we define the project scope, identify key requirements, and create a roadmap that sets the foundation for success.",
-    color: "#226fd3",
+    color: "#dce8f8",
+    textColor: "#1d407e",
     lightBg: "#e8f1fc",
+    image: "/steps/1.svg",
   },
   {
     number: "02",
     title: "UI/UX Design",
     description:
       "Our designers craft pixel-perfect mockups and interactive prototypes that bring your brand to life. We focus on intuitive user experiences, modern aesthetics, and responsive layouts that captivate and convert.",
-    color: "#226fd3",
+    color: "#9abfef",
+    textColor: "#1d407e",
     lightBg: "#f0f6fe",
+    image: "/steps/2.svg",
   },
   {
     number: "03",
     title: "Development",
     description:
       "We build your project using cutting-edge technologies and clean, scalable code. From front-end interactions to back-end logic, every line is optimized for performance, security, and seamless functionality.",
-    color: "#226fd3",
+    color: "#5995e6",
+    textColor: "#ffffff",
     lightBg: "#e8f1fc",
+    image: "/steps/3.svg",
   },
   {
     number: "04",
@@ -34,7 +41,9 @@ const steps = [
     description:
       "After rigorous testing and quality assurance, we deploy your project to production. We handle hosting setup, domain configuration, and post-launch support to ensure a smooth and successful go-live.",
     color: "#226fd3",
+    textColor: "#ffffff",
     lightBg: "#f0f6fe",
+    image: "/steps/4.svg",
   },
 ]
 
@@ -72,35 +81,65 @@ function StepCard({
         className="relative w-full max-w-7xl"
       >
         <div
-          className="rounded-sm md:rounded-xl overflow-hidden"
-          style={{ backgroundColor: step.color }}
+          className="rounded-sm md:rounded-xl overflow-hidden bg-black"
         >
           <div className="flex flex-col md:flex-row items-stretch">
             {/* Left: Number (Desktop) */}
             <div
-              className="hidden md:flex flex-col items-center justify-center md:h-[420px] md:w-[420px] shrink-0 bg-black"
+              className="hidden md:flex flex-col items-start justify-end p-6 md:h-[420px] md:w-[420px] shrink-0 bg-black relative overflow-hidden"
             >
+              <Image
+                src={step.image}
+                alt=""
+                fill
+                className="object-contain p-10 opacity-40"
+                aria-hidden="true"
+              />
               <span
-                className="text-9xl font-black tracking-tighter leading-none text-white/15"
+                className="text-9xl tracking-tighter leading-none text-neutral-500 relative z-1 rotate-[-15deg] -mb-4 -ml-2 select-none"
+                style={{ fontFamily: "var(--font-caveat)" }}
               >
                 {step.number}
               </span>
             </div>
 
             {/* Right: Content */}
-            <div className="flex-1 flex flex-col justify-center px-3 py-3 md:px-10 md:py-10 relative">
+            <div 
+              className="flex-1 flex flex-col justify-center px-3 py-3 md:px-10 md:py-10 relative overflow-hidden"
+              style={{ backgroundColor: step.color }}
+            >
               {/* Mobile Black Square */}
-              <div className="md:hidden w-20 h-20 bg-black rounded-sm flex items-center justify-center mb-5 shrink-0">
-                <span className="text-3xl font-black tracking-tighter leading-none text-white/15">
+              <div className="md:hidden w-20 h-20 bg-black rounded-sm flex items-start justify-end p-2 mb-5 shrink-0 relative overflow-hidden">
+                <Image
+                  src={step.image}
+                  alt=""
+                  fill
+                  className="object-contain p-3 opacity-40"
+                  aria-hidden="true"
+                />
+                <span 
+                  className="text-3xl tracking-tighter leading-none text-neutral-500 relative z-1 rotate-[-15deg]"
+                  style={{ fontFamily: "var(--font-caveat)" }}
+                >
                   {step.number}
                 </span>
               </div>
 
-              <h3 className="text-3xl md:text-5xl font-bold text-white mb-2 md:mb-5">
+              <h3 
+                className="text-4xl md:text-6xl font-bold mb-2 md:mb-5"
+                style={{ fontFamily: "var(--font-caveat)", color: step.textColor }}
+              >
                 {step.title}
               </h3>
 
-              <p className="text-sm md:text-lg text-white/70 leading-relaxed max-w-xl">
+              <p 
+                className="text-lg md:text-2xl leading-relaxed max-w-xl"
+                style={{ 
+                  fontFamily: "var(--font-caveat)", 
+                  color: step.textColor,
+                  opacity: step.textColor === "#ffffff" ? 0.7 : 0.85 
+                }}
+              >
                 {step.description}
               </p>
             </div>
