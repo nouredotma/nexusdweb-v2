@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import { AnimatedArrow } from "@/components/ui/animated-arrow"
 
 export default function HeroSection() {
   return (
@@ -67,20 +68,20 @@ export default function HeroSection() {
           <Link href="https://nexusdweb.vercel.app">
             <Button
               size="lg"
-              className="bg-white hover:bg-white/90 border-2 border-gray text-black font-bold rounded-full px-4 py-3 md:px-6 md:py-3 cursor-pointer text-xs md:text-sm h-auto"
+              className="group bg-white hover:bg-white/90 border-2 border-gray text-black font-bold rounded-full pl-2 pr-1 py-1 md:pl-4 md:pr-2 md:py-2 cursor-pointer text-xs md:text-sm h-auto flex items-center gap-2 transition-all duration-300"
             >
               Start Your Project
+              <AnimatedArrow wrapperClassName="bg-black shrink-0" arrowClassName="text-white" />
             </Button>
           </Link>
-          
-          
           
           <Link href="#services">
             <Button
               size="lg"
-              className="bg-black hover:bg-black/90 text-white border-2 border-black font-bold rounded-full px-4 py-3 md:px-6 md:py-3 cursor-pointer text-xs md:text-sm h-auto"
+              className="group bg-black hover:bg-black/90 text-white border-2 border-black font-bold rounded-full pl-2 pr-1 py-1 md:pl-4 md:pr-2 md:py-2 cursor-pointer text-xs md:text-sm h-auto flex items-center gap-2 transition-all duration-300"
             >
               View Services
+              <AnimatedArrow wrapperClassName="bg-white shrink-0" arrowClassName="text-black" />
             </Button>
           </Link>
         </div>

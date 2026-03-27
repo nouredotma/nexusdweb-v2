@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Zap, Shield, Rocket } from "lucide-react"
+import { AnimatedArrow } from "@/components/ui/animated-arrow"
 
 export default function CTASection() {
   return (
@@ -23,16 +24,18 @@ export default function CTASection() {
             <div className="flex flex-row gap-2 md:gap-4 justify-center">
               <Link href="https://nexusdweb.vercel.app">
                 <Button
-                  className="bg-white hover:bg-white/90 text-black rounded-full px-3 py-2.5 md:px-6 md:py-4 cursor-pointer w-full font-semibold text-xs md:text-base h-auto border border-white"
+                  className="group bg-white hover:bg-white/90 text-black rounded-full pl-2 pr-1 py-1 md:pl-4 md:pr-2 md:py-2 cursor-pointer w-full font-semibold text-xs md:text-base h-auto border border-white flex items-center justify-center gap-2 transition-all duration-300"
                 >
                   Start Your Project
+                  <AnimatedArrow wrapperClassName="bg-black shrink-0" arrowClassName="text-white" />
                 </Button>
               </Link>
               <Link href="#contact">
                 <Button
-                  className="bg-transparent hover:bg-white/10 border border-white text-white rounded-full px-3 py-2.5 md:px-6 md:py-4 cursor-pointer w-full font-semibold text-xs md:text-base h-auto"
+                  className="group bg-transparent hover:bg-white/10 border border-white text-white rounded-full pl-2 pr-1 py-1 md:pl-4 md:pr-2 md:py-2 cursor-pointer w-full font-semibold text-xs md:text-base h-auto flex items-center justify-center gap-2 transition-all duration-300"
                 >
                   Schedule Consultation
+                  <AnimatedArrow wrapperClassName="bg-white shrink-0" arrowClassName="text-black" />
                 </Button>
               </Link>
             </div>

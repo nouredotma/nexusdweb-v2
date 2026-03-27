@@ -221,16 +221,16 @@ export default function Footer() {
               <li>
                 <span className="text-white/70 font-medium flex items-center gap-0 whitespace-nowrap">
                   <ChevronRight size={14} className="-ml-1 shrink-0" />
-                  <span>+212 6 13 77 48 95</span>
+                  <span>+212 6 60 71 50 95</span>
                 </span>
               </li>
               <li>
                 <a
-                  href="mailto:contact@nexusdweb.com"
+                  href="mailto:omar@nexusdweb.com"
                   className="text-white/70 hover:text-white transition font-medium flex items-center gap-0 whitespace-nowrap"
                 >
                   <ChevronRight size={14} className="-ml-1 shrink-0" />
-                  <span>contact@nexusdweb.com</span>
+                  <span>omar@nexusdweb.com</span>
                 </a>
               </li>
               <li>

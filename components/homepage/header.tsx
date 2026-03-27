@@ -7,6 +7,7 @@ import Image from "next/image"
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion"
 import { Menu, X, Sun, Moon } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { AnimatedArrow } from "@/components/ui/animated-arrow"
 
 interface NavItem {
   name: string
@@ -154,17 +155,21 @@ export default function Header() {
         <div className="hidden md:flex items-center justify-end relative z-30 gap-2">
           <Link href="#contact" className="relative z-30">
             <Button
-              className={`transition-all duration-300 rounded-full h-11 px-6 py-2 font-semibold text-sm cursor-pointer ${
+              className={`group transition-all duration-300 rounded-full h-13 pl-4 pr-2 py-2 font-semibold text-sm cursor-pointer flex items-center gap-2 ${
                 visible
                   ? "bg-primary text-white hover:bg-primary/90 border border-primary hover:border-primary"
                   : "bg-black text-white hover:bg-black/90 border border-black hover:border-black"
               }`}
             >
               Get a Quote
+              <AnimatedArrow 
+                wrapperClassName={visible ? "bg-black" : "bg-white"} 
+                arrowClassName={visible ? "text-white" : "text-black"} 
+              />
             </Button>
           </Link>
           <Button
-            className={`transition-all duration-300 relative z-30 rounded-sm h-11 w-11 p-0 flex items-center justify-center cursor-pointer ${
+            className={`transition-all duration-300 relative z-30 rounded-sm h-13 w-13 p-0 flex items-center justify-center cursor-pointer ${
               visible
                 ? "bg-primary text-white hover:bg-primary/90 border border-primary hover:border-primary"
                 : "bg-black text-white hover:bg-black/90 border border-black hover:border-black"
@@ -246,9 +251,10 @@ export default function Header() {
               </div>
 
               <div className="w-full pt-6 border-t border-gray-100 flex items-center justify-between gap-3 px-2">
-                <Link href="#contact" className="flex-1">
-                  <Button className="h-12 py-2 w-full bg-primary hover:bg-primary/90 text-white cursor-pointer rounded-full font-semibold text-sm shadow-sm">
+                <Link href="#contact" className="flex-1 w-full">
+                  <Button className="group h-12 py-2 w-full bg-primary hover:bg-primary/90 text-white cursor-pointer rounded-full font-semibold text-sm shadow-sm flex items-center justify-between gap-2 transition-all duration-300">
                     Get a Quote
+                    <AnimatedArrow wrapperClassName="bg-black shrink-0" arrowClassName="text-white" />
                   </Button>
                 </Link>
                 <Button
