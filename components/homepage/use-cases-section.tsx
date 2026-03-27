@@ -85,7 +85,7 @@ export default function UseCasesSection() {
           {useCases.map((useCase) => (
             <div
               key={useCase.role}
-              className="relative flex flex-col bg-neutral-50 rounded-sm md:rounded-lg overflow-hidden border-2 border-neutral-200 transition-all duration-300 cursor-pointer hover:border-primary group"
+              className="relative flex flex-col bg-neutral-50 rounded-sm md:rounded-xl overflow-hidden border-2 border-neutral-200 transition-all duration-300 cursor-pointer hover:border-primary group"
               onClick={() => setSelectedService(useCase)}
             >
               {/* Image Container */}

@@ -33,7 +33,7 @@ export function PricingCard({ tier }: PricingCardProps) {
   return (
     <div
       className={cn(
-        "relative flex flex-col h-full w-full rounded-lg md:rounded-xl border-2 p-1.5 transition-all duration-300",
+        "relative flex flex-col h-full w-full rounded-sm md:rounded-xl border-2 p-1 transition-all duration-300",
         isDark 
           ? "bg-foreground text-background border-white/10" 
           : "bg-white text-foreground border-border",
@@ -57,7 +57,7 @@ export function PricingCard({ tier }: PricingCardProps) {
       )}
       {/* Top Section / Header */}
       <div className={cn(
-        "relative mb-4 rounded-md md:rounded-lg border-2 px-4 py-3 overflow-hidden",
+        "relative mb-4 rounded-sm md:rounded-lg border-2 px-4 py-3 overflow-hidden",
         isDark ? "bg-white/10 border-white/20" : "bg-zinc-200/50 border-zinc-200"
       )}>
         {/* Glass effect gradient for dark cards */}

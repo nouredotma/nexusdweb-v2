@@ -79,7 +79,7 @@ function StepCard({
         className="relative w-full max-w-7xl"
       >
         <div
-          className="rounded-sm md:rounded-lg overflow-hidden"
+          className="rounded-sm md:rounded-xl overflow-hidden"
           style={{ backgroundColor: step.color }}
         >
           <div className="flex flex-col md:flex-row items-stretch min-h-[320px] md:min-h-[420px]">

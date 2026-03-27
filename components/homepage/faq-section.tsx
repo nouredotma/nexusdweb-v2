@@ -93,7 +93,7 @@ export default function FAQSection() {
               onMouseEnter={() => handleInteraction(index, true)}
               onMouseLeave={() => handleInteraction(null, false)}
               onClick={() => handleClick(index)}
-              className={`group border-2 transition-colors duration-200 rounded-sm bg-neutral-50 border-neutral-200 overflow-hidden cursor-pointer h-full ${
+              className={`group border-2 transition-colors duration-200 rounded-sm md:rounded-xl bg-neutral-50 border-neutral-200 overflow-hidden cursor-pointer h-full ${
                 openIndex === index ? "border-primary" : "border-neutral-200 hover:border-primary"
               }`}
             >

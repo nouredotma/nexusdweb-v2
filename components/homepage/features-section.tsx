@@ -91,7 +91,7 @@ export default function FeaturesSection() {
 
         {/* Feature Content */}
         <div
-          className={`${currentFeature.bgColor} ${currentFeature.textColor} border-2 ${currentFeature.borderColor} max-w-7xl mx-auto rounded-sm md:rounded-lg overflow-hidden transition-all duration-500`}
+          className={`${currentFeature.bgColor} ${currentFeature.textColor} border-2 ${currentFeature.borderColor} max-w-7xl mx-auto rounded-sm md:rounded-xl overflow-hidden transition-all duration-500`}
         >
           <div className="grid md:grid-cols-2 gap-6 py-4 px-4 md:p-8 min-h-0 md:min-h-[600px]">
             {/* Left Content */}
@@ -116,7 +116,7 @@ export default function FeaturesSection() {
 
             {/* Right Content - Image */}
             <div className="flex items-center justify-center md:justify-end relative">
-              <div className="w-full max-w-2xl bg-white rounded-sm md:rounded-lg border-2 md:border-4 border-black overflow-hidden transform md:translate-x-10 lg:translate-x-16 scale-100 md:scale-110 lg:scale-125 transition-all duration-500">
+              <div className="w-full max-w-2xl bg-white rounded-sm md:rounded-xl border-2 md:border-4 border-black overflow-hidden transform md:translate-x-10 lg:translate-x-16 scale-100 md:scale-110 lg:scale-125 transition-all duration-500">
                 <img 
                   src={currentFeature.image} 
                   alt={currentFeature.category}
