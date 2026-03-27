@@ -6,7 +6,7 @@ import { Zap, Shield, Rocket } from "lucide-react"
 
 export default function CTASection() {
   return (
-    <section className="w-full py-10 px-3 lg:px-8 bg-background">
+    <section className="w-full py-10 px-2 lg:px-8 bg-background">
       <div className="max-w-7xl mx-auto">
         {/* Black background container */}
         <div className="bg-black rounded-lg md:rounded-xl px-5 py-10 md:px-20 md:py-12 ">

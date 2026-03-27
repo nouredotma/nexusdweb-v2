@@ -272,7 +272,7 @@ export default function TestimonialsSection() {
                   transition-opacity duration-700 ease-out
                   [&.is-in-view]:opacity-60
                   [&.is-snapped]:opacity-100
-                  flex justify-center px-1 sm:px-2
+                  flex justify-center px-0 md:px-2
                 "
               >
                 <ReviewCard review={review} index={index} />

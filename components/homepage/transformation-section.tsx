@@ -71,15 +71,15 @@ function StepCard({
   return (
     <div
       ref={cardRef}
-      className="h-[80vh] grid place-content-center sticky top-[15vh]"
+      className="h-[80svh] grid place-content-center sticky top-[18svh]"
       style={{ zIndex: index + 1 }}
     >
       <motion.div
         style={{ scale }}
-        className="relative w-[90vw] max-w-5xl mx-auto"
+        className="relative w-full max-w-7xl mx-auto"
       >
         <div
-          className="rounded-lg overflow-hidden"
+          className="rounded-sm md:rounded-lg overflow-hidden"
           style={{ backgroundColor: step.color }}
         >
           <div className="flex flex-col md:flex-row items-stretch min-h-[320px] md:min-h-[420px]">
@@ -134,47 +134,52 @@ export default function TransformationSection() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section id="process" className="w-full bg-background">
-      {/* Header */}
-      <div className="text-center space-y-1 py-10 px-3 sm:px-6 lg:px-8">
-        <h2 className="text-xl font-bold md:text-4xl text-balance">
-          <span className="relative inline-block">
-            <span className="relative z-10">How we bring your vision to life.</span>
-            <svg
-              className="absolute bottom-0 left-0 w-full h-[6px] md:h-[10px] text-primary select-none pointer-events-none"
-              viewBox="0 0 200 40"
-              preserveAspectRatio="none"
-            >
-              <motion.path
-                d="M5 20c40-5 90-5 130 2c35 5 55 5 65-2"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="28"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                initial={{ pathLength: 0, opacity: 0 }}
-                whileInView={{ pathLength: 1, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                viewport={{ once: true }}
-              />
-            </svg>
-          </span>
-        </h2>
-        <p className="text-muted-foreground max-w-xl mx-auto text-sm md:text-base">
-          From first idea to final launch — four clear steps to transform your concept into a polished, high-performing digital product.
-        </p>
-      </div>
+    <section id="process" className="w-full bg-background px-2 md:px-6 lg:px-8">
+      {/* Cards container — header + cards share the same sticky scope */}
+      <div ref={containerRef} className="relative pb-4">
+        {/* Header — sticky behind cards, scrolls away with the container */}
+        <div className="sticky top-[12svh] h-[86svh] z-0 pointer-events-none">
+          <div className="text-center space-y-1 py-5 pointer-events-auto">
+            <h2 className="text-xl font-bold md:text-4xl text-balance">
+              <span className="relative inline-block">
+                <span className="relative z-10">How we bring your vision to life.</span>
+                <svg
+                  className="absolute bottom-0 left-0 w-full h-[6px] md:h-[10px] text-primary select-none pointer-events-none"
+                  viewBox="0 0 200 40"
+                  preserveAspectRatio="none"
+                >
+                  <motion.path
+                    d="M5 20c40-5 90-5 130 2c35 5 55 5 65-2"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="28"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    whileInView={{ pathLength: 1, opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                    viewport={{ once: true }}
+                  />
+                </svg>
+              </span>
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto text-sm md:text-base">
+              From first idea to final launch — four clear steps to transform your concept into a polished, high-performing digital product.
+            </p>
+          </div>
+        </div>
 
-      {/* Stacking Cards */}
-      <div ref={containerRef} className="relative pb-24">
-        {steps.map((step, index) => (
-          <StepCard
-            key={step.number}
-            step={step}
-            index={index}
-            totalSteps={steps.length}
-          />
-        ))}
+        {/* Stacking Cards */}
+        <div className="-mt-[86svh] pt-14 md:pt-16">
+          {steps.map((step, index) => (
+            <StepCard
+              key={step.number}
+              step={step}
+              index={index}
+              totalSteps={steps.length}
+            />
+          ))}
+        </div>
       </div>
     </section>
   )
