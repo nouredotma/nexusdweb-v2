@@ -109,8 +109,8 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Nexus AI Assistant Button — Bottom Left */}
-        <div className="absolute bottom-3 left-3 md:bottom-6 md:left-6 z-20">
+        {/* Nexus AI Assistant Button — Bottom Left (Fixed) */}
+        <div className="fixed bottom-3 left-3 md:bottom-6 md:left-6 z-50">
           <Tooltip>
             <TooltipTrigger asChild>
               <motion.button

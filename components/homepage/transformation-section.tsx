@@ -1,7 +1,6 @@
 "use client"
 
 import { useRef } from "react"
-import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
 
 const steps = [
@@ -13,7 +12,7 @@ const steps = [
     color: "#dce8f8",
     textColor: "#1d407e",
     lightBg: "#e8f1fc",
-    image: "/steps/1.svg",
+    video: "/steps/1.mp4",
   },
   {
     number: "02",
@@ -23,7 +22,7 @@ const steps = [
     color: "#9abfef",
     textColor: "#1d407e",
     lightBg: "#f0f6fe",
-    image: "/steps/2.svg",
+    video: "/steps/2.mp4",
   },
   {
     number: "03",
@@ -33,7 +32,7 @@ const steps = [
     color: "#5995e6",
     textColor: "#ffffff",
     lightBg: "#e8f1fc",
-    image: "/steps/3.svg",
+    video: "/steps/3.mp4",
   },
   {
     number: "04",
@@ -43,7 +42,7 @@ const steps = [
     color: "#226fd3",
     textColor: "#ffffff",
     lightBg: "#f0f6fe",
-    image: "/steps/4.svg",
+    video: "/steps/4.mp4",
   },
 ]
 
@@ -86,17 +85,18 @@ function StepCard({
           <div className="flex flex-col md:flex-row items-stretch">
             {/* Left: Number (Desktop) */}
             <div
-              className="hidden md:flex flex-col items-start justify-end p-6 md:h-[420px] md:w-[420px] shrink-0 bg-black relative overflow-hidden"
+              className="hidden md:flex flex-col items-center justify-center md:h-[420px] md:w-[420px] shrink-0 relative overflow-hidden"
             >
-              <Image
-                src={step.image}
-                alt=""
-                fill
-                className="object-contain p-10 opacity-40"
-                aria-hidden="true"
+              <video
+                src={step.video}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover object-bottom opacity-50 pointer-events-none"
               />
               <span
-                className="text-9xl tracking-tighter leading-none text-neutral-500 relative z-1 rotate-[-15deg] -mb-4 -ml-2 select-none"
+                className="text-9xl tracking-tighter leading-none text-white relative z-10 select-none"
                 style={{ fontFamily: "var(--font-caveat)" }}
               >
                 {step.number}
@@ -109,16 +109,17 @@ function StepCard({
               style={{ backgroundColor: step.color }}
             >
               {/* Mobile Black Square */}
-              <div className="md:hidden w-20 h-20 bg-black rounded-sm flex items-start justify-end p-2 mb-5 shrink-0 relative overflow-hidden">
-                <Image
-                  src={step.image}
-                  alt=""
-                  fill
-                  className="object-contain p-3 opacity-40"
-                  aria-hidden="true"
+              <div className="md:hidden w-20 h-20 rounded-sm flex items-center justify-center mb-5 shrink-0 relative overflow-hidden">
+                <video
+                  src={step.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover object-bottom opacity-50 pointer-events-none"
                 />
                 <span 
-                  className="text-3xl tracking-tighter leading-none text-neutral-500 relative z-1 rotate-[-15deg]"
+                  className="text-3xl tracking-tighter leading-none text-white relative z-10"
                   style={{ fontFamily: "var(--font-caveat)" }}
                 >
                   {step.number}
@@ -126,16 +127,15 @@ function StepCard({
               </div>
 
               <h3 
-                className="text-4xl md:text-6xl font-bold mb-2 md:mb-5"
-                style={{ fontFamily: "var(--font-caveat)", color: step.textColor }}
+                className="text-2xl md:text-5xl font-bold mb-2 md:mb-5 tracking-tight"
+                style={{ color: step.textColor }}
               >
                 {step.title}
               </h3>
 
               <p 
-                className="text-lg md:text-2xl leading-relaxed max-w-xl"
+                className="text-sm md:text-lg leading-relaxed max-w-xl"
                 style={{ 
-                  fontFamily: "var(--font-caveat)", 
                   color: step.textColor,
                   opacity: step.textColor === "#ffffff" ? 0.7 : 0.85 
                 }}
