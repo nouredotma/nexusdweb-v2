@@ -6,7 +6,7 @@ import { Plus } from "lucide-react"
 
 const FAQs = [
   {
-    question: "What services does NEXUSDWEB offer?",
+    question: "What services does Nexusdweb offer?",
     answer:
       "We specialize in custom web design, robust web development, UI/UX design, mobile app development, eCommerce solutions, and comprehensive SEO optimization to help your business grow online.",
   },
