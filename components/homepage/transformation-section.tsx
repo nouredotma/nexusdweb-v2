@@ -71,12 +71,12 @@ function StepCard({
   return (
     <div
       ref={cardRef}
-      className="h-[80svh] grid place-content-center sticky top-[18svh]"
+      className="h-[80svh] w-full flex items-center justify-center sticky top-[18svh] px-2 md:px-6 lg:px-8"
       style={{ zIndex: index + 1 }}
     >
       <motion.div
         style={{ scale }}
-        className="relative w-full max-w-7xl mx-auto"
+        className="relative w-full max-w-7xl"
       >
         <div
           className="rounded-sm md:rounded-lg overflow-hidden"
@@ -134,12 +134,12 @@ export default function TransformationSection() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section id="process" className="w-full bg-background px-2 md:px-6 lg:px-8">
+    <section id="process" className="w-full bg-background">
       {/* Cards container — header + cards share the same sticky scope */}
       <div ref={containerRef} className="relative pb-4">
         {/* Header — sticky behind cards, scrolls away with the container */}
         <div className="sticky top-[12svh] h-[86svh] z-0 pointer-events-none">
-          <div className="text-center space-y-1 py-5 pointer-events-auto">
+          <div className="max-w-7xl mx-auto text-center space-y-1 py-5 px-2 md:px-6 lg:px-8 pointer-events-auto">
             <h2 className="text-xl font-bold md:text-4xl text-balance">
               <span className="relative inline-block">
                 <span className="relative z-10">How we bring your vision to life.</span>
@@ -170,7 +170,7 @@ export default function TransformationSection() {
         </div>
 
         {/* Stacking Cards */}
-        <div className="-mt-[86svh] pt-14 md:pt-16">
+        <div className="-mt-[86svh] pt-14 md:pt-14">
           {steps.map((step, index) => (
             <StepCard
               key={step.number}
