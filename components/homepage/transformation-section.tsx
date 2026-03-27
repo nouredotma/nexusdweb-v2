@@ -2,7 +2,6 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Search, Palette, Code2, Rocket } from "lucide-react"
 
 const steps = [
   {
@@ -10,7 +9,6 @@ const steps = [
     title: "Discovery & Brief",
     description:
       "We start by understanding your vision, goals, and audience. Through in-depth research and strategic planning, we define the project scope, identify key requirements, and create a roadmap that sets the foundation for success.",
-    icon: Search,
     color: "#226fd3",
     lightBg: "#e8f1fc",
   },
@@ -19,7 +17,6 @@ const steps = [
     title: "UI/UX Design",
     description:
       "Our designers craft pixel-perfect mockups and interactive prototypes that bring your brand to life. We focus on intuitive user experiences, modern aesthetics, and responsive layouts that captivate and convert.",
-    icon: Palette,
     color: "#226fd3",
     lightBg: "#f0f6fe",
   },
@@ -28,7 +25,6 @@ const steps = [
     title: "Development",
     description:
       "We build your project using cutting-edge technologies and clean, scalable code. From front-end interactions to back-end logic, every line is optimized for performance, security, and seamless functionality.",
-    icon: Code2,
     color: "#226fd3",
     lightBg: "#e8f1fc",
   },
@@ -37,7 +33,6 @@ const steps = [
     title: "Launch & Go Live",
     description:
       "After rigorous testing and quality assurance, we deploy your project to production. We handle hosting setup, domain configuration, and post-launch support to ensure a smooth and successful go-live.",
-    icon: Rocket,
     color: "#226fd3",
     lightBg: "#f0f6fe",
   },
@@ -66,8 +61,6 @@ function StepCard({
     index === totalSteps - 1 ? [1, 1] : [1, 0.92]
   )
 
-  const IconComponent = step.icon
-
   return (
     <div
       ref={cardRef}
@@ -82,46 +75,34 @@ function StepCard({
           className="rounded-sm md:rounded-xl overflow-hidden"
           style={{ backgroundColor: step.color }}
         >
-          <div className="flex flex-col md:flex-row items-stretch min-h-[320px] md:min-h-[420px]">
-            {/* Left: Number & Icon */}
+          <div className="flex flex-col md:flex-row items-stretch">
+            {/* Left: Number (Desktop) */}
             <div
-              className="flex flex-row md:flex-col items-center justify-center gap-4 md:gap-6 px-6 py-6 md:px-14 md:py-12 md:w-[280px] shrink-0 bg-black"
+              className="hidden md:flex flex-col items-center justify-center md:h-[420px] md:w-[420px] shrink-0 bg-black"
             >
               <span
-                className="text-6xl md:text-9xl font-black tracking-tighter leading-none text-white/15"
+                className="text-9xl font-black tracking-tighter leading-none text-white/15"
               >
                 {step.number}
               </span>
-              <div
-                className="w-16 h-16 md:w-24 md:h-24 rounded-xl flex items-center justify-center bg-white/10"
-              >
-                <IconComponent className="w-8 h-8 md:w-12 md:h-12 text-white" strokeWidth={1.5} />
-              </div>
             </div>
 
             {/* Right: Content */}
-            <div className="flex-1 flex flex-col justify-center px-6 py-6 md:px-14 md:py-12">
-              <h3 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-5">
+            <div className="flex-1 flex flex-col justify-center px-3 py-3 md:px-10 md:py-10 relative">
+              {/* Mobile Black Square */}
+              <div className="md:hidden w-20 h-20 bg-black rounded-sm flex items-center justify-center mb-5 shrink-0">
+                <span className="text-3xl font-black tracking-tighter leading-none text-white/15">
+                  {step.number}
+                </span>
+              </div>
+
+              <h3 className="text-3xl md:text-5xl font-bold text-white mb-2 md:mb-5">
                 {step.title}
               </h3>
 
-              <p className="text-base md:text-lg text-white/70 leading-relaxed max-w-xl">
+              <p className="text-sm md:text-lg text-white/70 leading-relaxed max-w-xl">
                 {step.description}
               </p>
-
-              {/* Progress dots */}
-              <div className="flex items-center gap-2 mt-8 md:mt-10">
-                {Array.from({ length: totalSteps }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="h-2 rounded-full transition-all duration-300"
-                    style={{
-                      width: i === index ? "2.5rem" : "0.5rem",
-                      backgroundColor: i === index ? "#ffffff" : "rgba(255,255,255,0.3)",
-                    }}
-                  />
-                ))}
-              </div>
             </div>
           </div>
         </div>
@@ -170,7 +151,7 @@ export default function TransformationSection() {
         </div>
 
         {/* Stacking Cards */}
-        <div className="-mt-[86svh] pt-14 md:pt-14">
+        <div className="-mt-[86svh] pt-12 md:pt-14">
           {steps.map((step, index) => (
             <StepCard
               key={step.number}

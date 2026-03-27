@@ -75,7 +75,16 @@ export default function HeroSection() {
             </Button>
           </Link>
           
-          <Link href="#services">
+          <Link 
+            href="#use-cases"
+            onClick={(e) => {
+              e.preventDefault()
+              const destination = document.querySelector("#use-cases")
+              if (destination) {
+                destination.scrollIntoView({ behavior: "smooth" })
+              }
+            }}
+          >
             <Button
               size="lg"
               className="group bg-black hover:bg-black/90 text-white border-2 border-black font-bold rounded-full pl-2 pr-1 py-1 md:pl-4 md:pr-2 md:py-2 cursor-pointer text-xs md:text-sm h-auto flex items-center gap-2 transition-all duration-300"
