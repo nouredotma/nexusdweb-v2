@@ -14,7 +14,7 @@ export default function GetAQuotePage() {
       <Header />
       
       {/* Main Content Area */}
-      <section className="flex-grow pt-28 md:pt-36 pb-20 w-full bg-white relative">
+      <section className="flex-grow pt-40 md:pt-32 pb-20 w-full bg-white relative">
         <div className="absolute inset-0 bg-grid-black/[0.02] -z-0" />
         
         <div className="relative z-10 max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
