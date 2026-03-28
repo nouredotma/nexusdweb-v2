@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import Preloader from "@/components/homepage/preloader"
 import { LanguageProvider } from "@/lib/language-context"
+import { Toaster } from "sonner"
 
 const urbanist = Urbanist({ subsets: ["latin"] })
 const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" })
@@ -120,6 +121,7 @@ export default function RootLayout({
         <LanguageProvider>
           {children}
         </LanguageProvider>
+        <Toaster position="top-center" />
         <Analytics />
       </body>
     </html>

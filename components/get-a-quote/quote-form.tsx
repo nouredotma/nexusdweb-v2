@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { AnimatedArrow } from "@/components/ui/animated-arrow"
 import { useLanguage } from "@/lib/language-context"
+import { toast } from "sonner"
 import {
   Select,
   SelectContent,
@@ -17,6 +18,7 @@ import {
 
 export default function QuoteForm() {
   const { t } = useLanguage()
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -34,6 +36,55 @@ export default function QuoteForm() {
 
   const handleServiceChange = (value: string) => {
     setFormData(prev => ({ ...prev, service: value }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    if (!formData.firstName || !formData.email || !formData.message) {
+      toast.error(t.getQuote.form.labels.firstName + ", " + t.getQuote.form.labels.email + " & " + t.getQuote.form.labels.message + " are required")
+      return
+    }
+
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: `${formData.firstName} ${formData.lastName}`.trim(),
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          service: formData.service,
+          message: formData.message,
+          subject: `Nouvelle demande de devis de ${formData.firstName} ${formData.lastName}`
+        }),
+      })
+
+      if (response.ok) {
+        toast.success("Message sent successfully!")
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          company: "",
+          service: "",
+          message: ""
+        })
+      } else {
+        toast.error("Failed to send message. Please try again.")
+      }
+    } catch (error) {
+      console.error(error)
+      toast.error("Failed to send message. Please try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleWhatsAppClick = () => {
@@ -54,10 +105,10 @@ export default function QuoteForm() {
 
   return (
     <div className="bg-white border-2 border-neutral-200 rounded-sm md:rounded-xl px-2 py-4 md:py-6 md:px-8">
-      <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
+      <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
           <div className="flex flex-col gap-2">
-            <Label htmlFor="firstName" className="font-semibold px-2 text-xs md:text-sm">{t.getQuote.form.labels.firstName}</Label>
+            <Label htmlFor="firstName" className="font-semibold px-2 text-xs md:text-sm">{t.getQuote.form.labels.firstName} *</Label>
             <Input 
               id="firstName" 
               placeholder={t.getQuote.form.placeholders.firstName} 
@@ -79,7 +130,7 @@ export default function QuoteForm() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label htmlFor="email" className="font-semibold px-2 text-xs md:text-sm">{t.getQuote.form.labels.email}</Label>
+          <Label htmlFor="email" className="font-semibold px-2 text-xs md:text-sm">{t.getQuote.form.labels.email} *</Label>
           <Input 
             id="email" 
             type="email" 
@@ -133,7 +184,7 @@ export default function QuoteForm() {
         </div>
 
         <div className="flex flex-col gap-2 md:mt-1">
-          <Label htmlFor="message" className="font-semibold px-2 text-xs md:text-sm">{t.getQuote.form.labels.message}</Label>
+          <Label htmlFor="message" className="font-semibold px-2 text-xs md:text-sm">{t.getQuote.form.labels.message} *</Label>
           <Textarea 
             id="message" 
             placeholder={t.getQuote.form.placeholders.message} 
@@ -147,10 +198,11 @@ export default function QuoteForm() {
           <Button 
             type="submit" 
             size="lg" 
-            className="flex-7 bg-black hover:bg-black/90 text-white font-bold rounded-full h-12 md:h-14 px-3 md:px-4 text-[11px] md:text-base flex items-center justify-between transition-all duration-300 group whitespace-nowrap cursor-pointer text-left"
+            disabled={isSubmitting}
+            className="flex-7 bg-black hover:bg-black/90 text-white font-bold rounded-full h-12 md:h-14 px-3 md:px-4 text-[11px] md:text-base flex items-center justify-between transition-all duration-300 group whitespace-nowrap cursor-pointer text-left disabled:opacity-70 disabled:cursor-not-allowed"
           >
-            {t.getQuote.form.submit}
-            <AnimatedArrow wrapperClassName="bg-white shrink-0 ml-1 md:ml-2" arrowClassName="text-black" />
+            {isSubmitting ? "Sending..." : t.getQuote.form.submit}
+            {!isSubmitting && <AnimatedArrow wrapperClassName="bg-white shrink-0 ml-1 md:ml-2" arrowClassName="text-black" />}
           </Button>
           
           <button 
