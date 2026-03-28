@@ -52,7 +52,7 @@ export const metadata: Metadata = {
       "NexusdWeb is a premium digital agency specialized in crafting high-performance websites, bespoke designs, and strategic digital experiences.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/icon.png",
         width: 1200,
         height: 630,
         alt: "NexusdWeb - Premium Web Solutions Agency",
@@ -61,10 +61,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@nexusdweb",
     title: "NexusdWeb | Bespoke Web Design & Tech Agency",
     description:
       "We build premium digital experiences. From high-end web design to custom development, NexusdWeb helps brands dominate the digital landscape.",
-    images: ["/og-image.png"],
+    images: ["/icon.png"],
     creator: "@nexusdweb",
   },
   robots: {
@@ -77,9 +78,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  alternates: {
-    canonical: "/",
   },
 }
 
@@ -103,14 +101,16 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
-              "name": "NEXUSDWEB",
+              "name": "NexusdWeb",
               "url": "https://nexusdweb.com",
               "logo": "https://nexusdweb.com/icon.png",
-              "description": "NEXUSDWEB is a premium digital agency specializing in high-end web design, custom development, and SEO optimization for ambitious brands.",
+              "image": "https://nexusdweb.com/og-image.png",
+              "description": "NexusdWeb is a premium digital agency specializing in high-end web design, custom development, and SEO optimization for ambitious brands.",
               "address": {
                 "@type": "PostalAddress",
                 "addressCountry": "US"
               },
+              "priceRange": "$$$",
               "sameAs": [
                 "https://twitter.com/nexusdweb"
               ]
