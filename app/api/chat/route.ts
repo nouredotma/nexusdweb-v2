@@ -2,9 +2,20 @@ import { GoogleGenerativeAI, Content } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 
 // System instruction shared between both AI providers
-const systemInstruction = `
+const getSystemInstruction = (language: string) => {
+  let langContext = "";
+  if (language === 'fr') {
+    langContext = "Respond primarily in FRENCH, as the user has selected French as their language.";
+  } else if (language === 'es') {
+    langContext = "Respond primarily in SPANISH, as the user has selected Spanish as their language.";
+  } else {
+    langContext = "Respond primarily in ENGLISH, as the user has selected English as their language.";
+  }
+
+  return `
 You are Nexus — the AI assistant for NexusDWeb, a premium digital agency based in Marrakech, Morocco. You represent the agency in conversations with potential clients, existing clients, and curious visitors. Your purpose is to inform, guide, and convert.
 
+CRITICAL LANGUAGE INSTRUCTION: ${langContext} Always match the user's language unless they explicitly ask to switch.
 
 PERSONALITY AND TONE:
 
@@ -127,6 +138,7 @@ If someone asks about a specific project type (e.g. "Can you build a SaaS dashbo
 
 Never invent project names, client names, or portfolio items that do not exist. If you do not have specific examples to share, say the portfolio is being updated and offer to connect them with the team directly.
 `;
+};
 
 // OpenRouter fallback function
 const FREE_MODELS = [
@@ -138,7 +150,7 @@ const FREE_MODELS = [
   "huggingfaceh4/zephyr-7b-beta:free",
 ];
 
-async function callOpenRouter(messages: any[]): Promise<string> {
+async function callOpenRouter(messages: any[], language: string): Promise<string> {
   const openRouterKey = process.env.OPENROUTER_API_KEY;
   
   if (!openRouterKey) {
@@ -147,7 +159,7 @@ async function callOpenRouter(messages: any[]): Promise<string> {
 
   // Convert messages to OpenRouter format
   const formattedMessages = [
-    { role: "system", content: systemInstruction },
+    { role: "system", content: getSystemInstruction(language) },
     ...messages.map((m: any) => ({
       role: m.role === "user" ? "user" : "assistant",
       content: m.content,
@@ -193,12 +205,12 @@ async function callOpenRouter(messages: any[]): Promise<string> {
 }
 
 // Gemini API function
-async function callGemini(messages: any[], apiKey: string): Promise<string> {
+async function callGemini(messages: any[], apiKey: string, language: string): Promise<string> {
   const genAI = new GoogleGenerativeAI(apiKey);
   
   const model = genAI.getGenerativeModel({
     model: "gemini-flash-latest",
-    systemInstruction: systemInstruction,
+    systemInstruction: getSystemInstruction(language),
   });
 
   // Handle history: Gemini expects history to start with 'user' role
@@ -226,7 +238,7 @@ async function callGemini(messages: any[], apiKey: string): Promise<string> {
 
 export async function POST(req: Request) {
   try {
-    const { messages } = await req.json();
+    const { messages, language = 'en' } = await req.json();
     const geminiKey = process.env.GEMINI_API_KEY;
     const openRouterKey = process.env.OPENROUTER_API_KEY;
 
@@ -245,7 +257,7 @@ export async function POST(req: Request) {
     // Try Gemini first if available
     if (geminiKey) {
       try {
-        text = await callGemini(messages, geminiKey);
+        text = await callGemini(messages, geminiKey, language);
         return NextResponse.json({ text });
       } catch (geminiError) {
         console.error("Gemini API failed, trying OpenRouter fallback:", geminiError);
@@ -253,7 +265,7 @@ export async function POST(req: Request) {
         // If OpenRouter key is available, try it as fallback
         if (openRouterKey) {
           try {
-            text = await callOpenRouter(messages);
+            text = await callOpenRouter(messages, language);
             return NextResponse.json({ text });
           } catch (openRouterError) {
             console.error("OpenRouter fallback also failed:", openRouterError);
@@ -272,7 +284,7 @@ export async function POST(req: Request) {
     } else if (openRouterKey) {
       // Only OpenRouter is configured
       try {
-        text = await callOpenRouter(messages);
+        text = await callOpenRouter(messages, language);
         return NextResponse.json({ text });
       } catch (openRouterError) {
         console.error("OpenRouter API failed:", openRouterError);

@@ -9,6 +9,7 @@ import { useLenis } from "lenis/react";
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogPortal, DialogOverlay } from "@/components/ui/dialog";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/lib/language-context";
 
 interface AiAssistantModalProps {
   open: boolean;
@@ -21,12 +22,6 @@ interface Message {
   content: string;
   isNew?: boolean;
 }
-
-const SUGGESTED_QUESTIONS = [
-  "What services do you offer?",
-  "Can I see your portfolio?",
-  "How can I start a project?",
-];
 
 /* Word-by-word typing animation component */
 interface TypingTextProps {
@@ -173,13 +168,25 @@ function formatBotMessage(content: string) {
 }
 
 function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps) {
+  const { t, language } = useLanguage();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
       type: "bot",
-      content: "Hey! I'm Nexus, the AI assistant for NexusDWeb. I can tell you about our services, showcase our portfolio, or help you start a project. What would you like to know?",
+      content: t.ai.initialBotMessage,
     },
   ]);
+
+  // Update initial message if language changes
+  useEffect(() => {
+    setMessages(prev => {
+      if (prev.length === 1 && prev[0].id === 1) {
+        return [{ ...prev[0], content: t.ai.initialBotMessage }];
+      }
+      return prev;
+    });
+  }, [language, t.ai.initialBotMessage]);
+
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [hasStartedChat, setHasStartedChat] = useState(false);
@@ -250,13 +257,13 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
     }
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SpeechRecognition) {
-      alert("Speech recognition is not supported in your browser.");
+      alert(t.ai.recording.notSupported);
       return;
     }
     const recognition = new SpeechRecognition();
     recognition.continuous = false;
     recognition.interimResults = false;
-    recognition.lang = "en-US";
+    recognition.lang = language === 'en' ? 'en-US' : (language === 'fr' ? 'fr-FR' : 'es-ES');
     recognition.onstart = () => setIsRecording(true);
     recognition.onresult = (event: any) => {
       const transcript = event.results[0][0].transcript;
@@ -274,7 +281,7 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
     recognition.onend = () => setIsRecording(false);
     recognitionRef.current = recognition;
     recognition.start();
-  }, [isRecording]);
+  }, [isRecording, language, t.ai.recording.notSupported]);
 
   const handleSend = useCallback(async () => {
     const trimmed = input.trim();
@@ -286,21 +293,25 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
     setHasStartedChat(true);
     try {
       const conversationHistory = [...messagesRef.current, userMessage].map((m: Message) => ({ role: m.type, content: m.content }));
-      const response = await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: conversationHistory }) });
+      const response = await fetch("/api/chat", { 
+        method: "POST", 
+        headers: { "Content-Type": "application/json" }, 
+        body: JSON.stringify({ messages: conversationHistory, language }) 
+      });
       if (!response.ok) throw new Error("Failed to fetch response");
       const data = await response.json();
       if (data?.text) {
         setMessages((prev) => [...prev, { id: Date.now() + 1, type: "bot", content: data.text, isNew: true }]);
       } else {
-        setMessages((prev) => [...prev, { id: Date.now() + 1, type: "bot", content: "I didn't get a reply — please try again.", isNew: true }]);
+        setMessages((prev) => [...prev, { id: Date.now() + 1, type: "bot", content: t.ai.errors.failResponse, isNew: true }]);
       }
     } catch (err) {
       console.error("Error sending message:", err);
-      setMessages((prev) => [...prev, { id: Date.now() + 1, type: "bot", content: "Sorry, I'm having trouble connecting right now. Please try again later." }]);
+      setMessages((prev) => [...prev, { id: Date.now() + 1, type: "bot", content: t.ai.errors.failConnect }]);
     } finally {
       setIsTyping(false);
     }
-  }, [input]);
+  }, [input, language, t.ai.errors.failResponse, t.ai.errors.failConnect]);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -315,8 +326,8 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
           )}
         >
           <VisuallyHidden.Root>
-            <DialogTitle>Nexus AI Assistant</DialogTitle>
-            <DialogDescription>Chat with Nexus, the NexusDWeb AI assistant, to learn about our services.</DialogDescription>
+            <DialogTitle>{t.ai.modalTitle}</DialogTitle>
+            <DialogDescription>{t.ai.modalDescription}</DialogDescription>
           </VisuallyHidden.Root>
 
           {/* Header */}
@@ -336,12 +347,12 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
             
             {/* Mobile: title on the left */}
             <div className="flex md:hidden items-center gap-2">
-              <span className="text-xs font-semibold text-gray-700">Nexus AI</span>
+              <span className="text-xs font-semibold text-gray-700">{t.ai.headerTitleMobile}</span>
             </div>
             
             {/* Desktop: center title bar */}
             <div className="hidden md:flex flex-1 mx-4 bg-gray-200 rounded-md h-5 max-w-md items-center justify-center">
-              <span className="text-[10px] font-medium text-gray-500 uppercase tracking-widest">Nexus AI — NexusDWeb</span>
+              <span className="text-[10px] font-medium text-gray-500 uppercase tracking-widest">{t.ai.headerTitleDesktop}</span>
             </div>
 
             {/* Desktop: robot icon */}
@@ -372,7 +383,7 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
                       layoutId="chat-title"
                       className="font-semibold text-gray-900 mb-4 md:mb-8 text-center text-xl md:text-3xl"
                     >
-                      Hey! I'm Nexus 👋 <br className="hidden sm:block" /> Ask me about NexusDWeb
+                      {t.ai.welcomeTitle}
                     </motion.h3>
                     
                     <div className="w-full mb-4 md:mb-6 max-w-3xl px-2 md:px-4">
@@ -387,7 +398,7 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
                             "w-9 h-9 flex items-center justify-center transition-colors shrink-0 rounded-full cursor-pointer",
                             isRecording ? "bg-red-500 text-white animate-pulse" : "text-gray-400 hover:text-gray-600"
                           )}
-                          aria-label={isRecording ? "Stop recording" : "Start recording"}
+                          aria-label={isRecording ? t.ai.recording.stop : t.ai.recording.start}
                         >
                           {isRecording ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
                         </motion.button>
@@ -398,7 +409,7 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
                           onFocus={() => setIsFocused(true)}
                           onBlur={() => setIsFocused(false)}
                           onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void handleSend(); } }}
-                          placeholder="Ask me anything..."
+                          placeholder={t.ai.inputPlaceholder}
                           rows={1}
                           className="flex-1 bg-transparent border-0 ring-0 focus:ring-0 outline-none focus:outline-none text-gray-900 placeholder:text-gray-400 py-2 md:py-2.5 resize-none text-[13px] md:text-[15px] leading-relaxed max-h-[120px] md:max-h-[150px] min-h-[24px]"
                         />
@@ -411,7 +422,7 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
                     </div>
 
                     <div className="flex flex-row flex-wrap justify-center gap-1.5 md:gap-2 w-full max-w-6xl px-2 md:px-4">
-                      {SUGGESTED_QUESTIONS.map((question, idx) => (
+                      {t.ai.suggestedQuestions.map((question, idx) => (
                         <motion.button key={idx} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1 + idx * 0.1 }} onClick={() => setInput(question)} className="px-2.5 py-1 md:px-4 md:py-2 rounded-full border border-gray-200 text-gray-500 text-[11px] md:text-sm hover:border-[#226fd3] hover:text-[#226fd3] transition-all bg-white cursor-pointer whitespace-nowrap">
                           {question}
                         </motion.button>
@@ -458,10 +469,10 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="px-3 py-1 md:px-4 shrink-0 bg-linear-to-t from-white via-white to-transparent">
                 <div className="mx-auto max-w-5xl px-2 md:px-4">
                   <div className="relative flex items-center gap-1.5 md:gap-2 bg-neutral-50 rounded-full p-1.5 pl-2.5 md:p-2 md:pl-3 border border-neutral-200">
-                    <motion.button type="button" onClick={toggleRecording} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className={cn("w-9 h-9 flex items-center justify-center transition-colors shrink-0 rounded-full cursor-pointer", isRecording ? "bg-red-500 text-white animate-pulse" : "text-gray-400 hover:text-gray-600")} aria-label={isRecording ? "Stop recording" : "Start recording"}>
+                    <motion.button type="button" onClick={toggleRecording} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className={cn("w-9 h-9 flex items-center justify-center transition-colors shrink-0 rounded-full cursor-pointer", isRecording ? "bg-red-500 text-white animate-pulse" : "text-gray-400 hover:text-gray-600")} aria-label={isRecording ? t.ai.recording.stop : t.ai.recording.start}>
                       {isRecording ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
                     </motion.button>
-                    <textarea ref={textareaRef} value={input} onChange={handleTextareaChange} onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void handleSend(); } }} placeholder="Continue the conversation..." rows={1} className="flex-1 bg-transparent border-0 ring-0 focus:ring-0 outline-none focus:outline-none text-gray-900 placeholder:text-gray-400 py-2 md:py-2.5 resize-none text-[13px] md:text-[15px] leading-relaxed max-h-[120px] md:max-h-[150px] min-h-[24px]" />
+                    <textarea ref={textareaRef} value={input} onChange={handleTextareaChange} onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void handleSend(); } }} placeholder={t.ai.inputPlaceholderContinue} rows={1} className="flex-1 bg-transparent border-0 ring-0 focus:ring-0 outline-none focus:outline-none text-gray-900 placeholder:text-gray-400 py-2 md:py-2.5 resize-none text-[13px] md:text-[15px] leading-relaxed max-h-[120px] md:max-h-[150px] min-h-[24px]" />
                     <div className="shrink-0 mb-1 mr-1">
                       <motion.button onClick={() => void handleSend()} disabled={!input.trim()} whileTap={input.trim() ? { scale: 0.95 } : {}} className={cn("h-9 w-9 rounded-full flex items-center justify-center transition-all duration-200", input.trim() ? "bg-[#226fd3] text-white cursor-pointer" : "bg-gray-200 text-gray-400 cursor-not-allowed")} aria-label="Send message">
                         <ArrowUp className="h-4 w-4" />
@@ -469,7 +480,7 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
                     </div>
                   </div>
                   <div className="text-center mt-1">
-                    <p className="text-[11px] text-gray-400">Nexus can make mistakes. Check important info.</p>
+                    <p className="text-[11px] text-gray-400">{t.ai.disclaimer}</p>
                   </div>
                 </div>
               </motion.div>

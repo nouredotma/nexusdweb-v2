@@ -3,42 +3,38 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Plus } from "lucide-react"
-
-const FAQs = [
-  {
-    question: "What services does Nexusdweb offer?",
-    answer:
-      "We specialize in custom web design, robust web development, UI/UX design, mobile app development, eCommerce solutions, and comprehensive SEO optimization to help your business grow online.",
-  },
-  {
-    question: "How long does it take to design and develop a custom website?",
-    answer:
-      "The timeline varies depending on the project's complexity. A standard web design project typically takes 4-8 weeks, while custom web applications or eCommerce solutions may take longer. We'll provide a detailed timeline during our initial consultation.",
-  },
-  {
-    question: "Do you provide ongoing support after the website goes live?",
-    answer:
-      "Yes, absolutely. We offer ongoing maintenance and support packages to ensure your digital platform remains secure, up-to-date, and performs optimally long after the initial launch.",
-  },
-  {
-    question: "Will my website be mobile-friendly and optimized for search engines?",
-    answer:
-      "Definitely. All of our websites are built with a mobile-first approach, ensuring full responsiveness across devices. We also implement best-practice SEO structures off the bat, so your site is ready to rank well on Google.",
-  },
-  {
-    question: "Can you help redesign or improve an existing website?",
-    answer:
-      "Yes, we frequently revamp existing websites. Whether you need a fresh UI/UX overhaul, performance optimization, or new features integrated into your current platform, our team can help elevate your brand identity.",
-  },
-  {
-    question: "Which platforms and technologies do you use for web development?",
-    answer:
-      "We utilize modern, high-performance tech stacks tailored to your project. This includes Next.js, React, Tailwind CSS, and robust backend solutions. For eCommerce, we work with custom architectures to ensure scalable growth.",
-  },
-]
+import { useLanguage } from "@/lib/language-context"
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const { t } = useLanguage()
+
+  const FAQs = [
+    {
+      question: t.faq.questions.q1.q,
+      answer: t.faq.questions.q1.a,
+    },
+    {
+      question: t.faq.questions.q2.q,
+      answer: t.faq.questions.q2.a,
+    },
+    {
+      question: t.faq.questions.q3.q,
+      answer: t.faq.questions.q3.a,
+    },
+    {
+      question: t.faq.questions.q4.q,
+      answer: t.faq.questions.q4.a,
+    },
+    {
+      question: t.faq.questions.q5.q,
+      answer: t.faq.questions.q5.a,
+    },
+    {
+      question: t.faq.questions.q6.q,
+      answer: t.faq.questions.q6.a,
+    },
+  ]
 
   const handleInteraction = (index: number | null, isHover: boolean) => {
     // Only handle hover on desktop (min-width: 768px as a rule of thumb)
@@ -59,7 +55,7 @@ export default function FAQSection() {
         <div className="text-center mb-8 space-y-1">
           <h2 className="text-xl font-bold md:text-4xl text-balance text-black">
             <span className="relative inline-block">
-              <span className="relative z-10">Frequently</span>
+              <span className="relative z-10">{t.faq.title1}</span>
               <svg
                 className="absolute bottom-0 left-0 w-full h-[6px] md:h-[10px] text-primary select-none pointer-events-none"
                 viewBox="0 0 200 40"
@@ -79,10 +75,10 @@ export default function FAQSection() {
                 />
               </svg>
             </span>{" "}
-            asked questions
+            {t.faq.title2}
           </h2>
           <p className="text-muted-foreground text-sm md:text-base">
-            Everything you need to know about our web development process and services.
+            {t.faq.subtitle}
           </p>
         </div>
 

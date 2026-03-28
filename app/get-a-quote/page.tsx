@@ -1,14 +1,13 @@
+"use client"
+
 import Header from "@/components/homepage/header"
 import Footer from "@/components/homepage/footer"
 import QuoteForm from "@/components/get-a-quote/quote-form"
-import { Metadata } from "next"
-
-export const metadata: Metadata = {
-  title: "Get a Quote | Nexus",
-  description: "Contact us to start your project. We'd love to hear from you.",
-}
+import { useLanguage } from "@/lib/language-context"
 
 export default function GetAQuotePage() {
+  const { t } = useLanguage()
+
   return (
     <main className="w-full min-h-screen flex flex-col">
       <Header />
@@ -23,20 +22,20 @@ export default function GetAQuotePage() {
             {/* Left side: Information / Copy */}
             <div className="flex flex-col justify-start max-w-xl lg:sticky lg:top-40">
               <div className="inline-flex mb-4 px-3 py-1.5 rounded-full bg-primary/5 border border-primary w-fit">
-                <span className="text-xs md:text-sm font-semibold text-primary">Let's Talk</span>
+                <span className="text-xs md:text-sm font-semibold text-primary">{t.getQuote.badge}</span>
               </div>
               
               <h1 className="text-xl md:text-5xl font-bold mb-6 text-black tracking-tight leading-[1.1]">
-                Ready to transform your digital presence?
+                {t.getQuote.heading}
               </h1>
               
               <p className="text-xs md:text-base font-medium text-muted-foreground mb-8">
-                Fill out the form and our team will get back to you within 24 hours to discuss your project and how we can help.
+                {t.getQuote.subheading}
               </p>
 
               <div className="flex items-center gap-6 mt-4">
                 <div className="flex flex-col">
-                  <span className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1">Email us</span>
+                  <span className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-1">{t.getQuote.emailUs}</span>
                   <a href="mailto:omar@nexusdweb.com" className="text-base md:text-lg font-bold text-black hover:underline decoration-2 underline-offset-4">
                     omar@nexusdweb.com
                   </a>

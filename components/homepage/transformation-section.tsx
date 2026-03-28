@@ -2,56 +2,14 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-
-const steps = [
-  {
-    number: "01",
-    title: "Discovery & Brief",
-    description:
-      "We start by understanding your vision, goals, and audience. Through in-depth research and strategic planning, we define the project scope, identify key requirements, and create a roadmap that sets the foundation for success.",
-    color: "#dce8f8",
-    textColor: "#1d407e",
-    lightBg: "#e8f1fc",
-    video: "/steps/1.mp4",
-  },
-  {
-    number: "02",
-    title: "UI/UX Design",
-    description:
-      "Our designers craft pixel-perfect mockups and interactive prototypes that bring your brand to life. We focus on intuitive user experiences, modern aesthetics, and responsive layouts that captivate and convert.",
-    color: "#9abfef",
-    textColor: "#1d407e",
-    lightBg: "#f0f6fe",
-    video: "/steps/2.mp4",
-  },
-  {
-    number: "03",
-    title: "Development",
-    description:
-      "We build your project using cutting-edge technologies and clean, scalable code. From front-end interactions to back-end logic, every line is optimized for performance, security, and seamless functionality.",
-    color: "#5995e6",
-    textColor: "#ffffff",
-    lightBg: "#e8f1fc",
-    video: "/steps/3.mp4",
-  },
-  {
-    number: "04",
-    title: "Launch & Go Live",
-    description:
-      "After rigorous testing and quality assurance, we deploy your project to production. We handle hosting setup, domain configuration, and post-launch support to ensure a smooth and successful go-live.",
-    color: "#226fd3",
-    textColor: "#ffffff",
-    lightBg: "#f0f6fe",
-    video: "/steps/4.mp4",
-  },
-]
+import { useLanguage } from "@/lib/language-context"
 
 function StepCard({
   step,
   index,
   totalSteps,
 }: {
-  step: (typeof steps)[0]
+  step: any
   index: number
   totalSteps: number
 }) {
@@ -151,7 +109,47 @@ function StepCard({
 }
 
 export default function TransformationSection() {
+  const { t } = useLanguage()
   const containerRef = useRef<HTMLDivElement>(null)
+
+  const steps = [
+    {
+      number: "01",
+      title: t.transformation.steps.step1.title,
+      description: t.transformation.steps.step1.description,
+      color: "#dce8f8",
+      textColor: "#1d407e",
+      lightBg: "#e8f1fc",
+      video: "/steps/1.mp4",
+    },
+    {
+      number: "02",
+      title: t.transformation.steps.step2.title,
+      description: t.transformation.steps.step2.description,
+      color: "#9abfef",
+      textColor: "#1d407e",
+      lightBg: "#f0f6fe",
+      video: "/steps/2.mp4",
+    },
+    {
+      number: "03",
+      title: t.transformation.steps.step3.title,
+      description: t.transformation.steps.step3.description,
+      color: "#5995e6",
+      textColor: "#ffffff",
+      lightBg: "#e8f1fc",
+      video: "/steps/3.mp4",
+    },
+    {
+      number: "04",
+      title: t.transformation.steps.step4.title,
+      description: t.transformation.steps.step4.description,
+      color: "#226fd3",
+      textColor: "#ffffff",
+      lightBg: "#f0f6fe",
+      video: "/steps/4.mp4",
+    },
+  ]
 
   return (
     <section id="process" className="w-full bg-background">
@@ -162,7 +160,7 @@ export default function TransformationSection() {
           <div className="max-w-7xl mx-auto text-center space-y-1 py-5 px-2 md:px-6 lg:px-8 pointer-events-auto">
             <h2 className="text-xl font-bold md:text-4xl text-balance">
               <span className="relative inline-block">
-                <span className="relative z-10">How we bring your vision to life.</span>
+                <span className="relative z-10">{t.transformation.title}</span>
                 <svg
                   className="absolute bottom-0 left-0 w-full h-[6px] md:h-[10px] text-primary select-none pointer-events-none"
                   viewBox="0 0 200 40"
@@ -184,7 +182,7 @@ export default function TransformationSection() {
               </span>
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto text-sm md:text-base">
-              From first idea to final launch — four clear steps to transform your concept into a polished, high-performing digital product.
+              {t.transformation.subtitle}
             </p>
           </div>
         </div>

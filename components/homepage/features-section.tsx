@@ -1,67 +1,69 @@
 "use client"
 
 import { useState } from "react"
-
-const features = [
-  {
-    id: 1,
-    category: "SaaS Dashboard",
-    mobileCategory: "SaaS",
-    title: "L u z",
-    description: "A comprehensive analytics and management solution built for modern SaaS platforms. Featuring real-time data visualization, user behavioral tracking, and a seamless administrative interface to drive business growth.",
-    bgColor: "bg-[#ff4500]/25",
-    borderColor: "border-[#ff4500]",
-    textColor: "text-neutral-900",
-    image: "/projects/p1.png",
-  },
-  {
-    id: 2,
-    category: "Corporate Business",
-    mobileCategory: "Corporate",
-    title: "Yarborough Law Group",
-    description: "A high-performance corporate website designed to establish authority and trust. We focused on optimized conversion funnels, professional identity branding, and a sleek, fast-loading interface for global business.",
-    bgColor: "bg-[#936d47]/25",
-    borderColor: "border-[#936d47]",
-    textColor: "text-neutral-900",
-    image: "/projects/p2.png",
-  },
-  {
-    id: 3,
-    category: "E-commerce Store",
-    mobileCategory: "E-comm",
-    title: "TierraBlanca",
-    description: "An end-to-end e-commerce experience with a focus on user journey and sales conversion. Featuring lightning-fast checkout, mobile-first product exploration, and a premium aesthetic that elevates the shopping experience.",
-    bgColor: "bg-[#415e5a]/25",
-    borderColor: "border-[#415e5a]",
-    textColor: "text-neutral-900",
-    image: "/projects/p3.png",
-  },
-  {
-    id: 4,
-    category: "Moroccan Association",
-    mobileCategory: "Non-Profit",
-    title: "Turâth",
-    description: "Empowering local Moroccan associations with a digital platform to coordinate volunteer work and manage community impact. The design blends modern web standards with subtle cultural aesthetics.",
-    bgColor: "bg-[#863a22]/25",
-    borderColor: "border-[#863a22]",
-    textColor: "text-neutral-900",
-    image: "/projects/p4.png",
-  },
-  {
-    id: 5,
-    category: "Traveling Service",
-    mobileCategory: "Travel",
-    title: "Marrakesh Travel Services",
-    description: "A vibrant and intuitive booking platform that simplifies trip planning for explorers. We integrated immersive high-quality imagery and a modern brand identity to inspire global travelers and adventurers.",
-    bgColor: "bg-[#2c3863]/25",
-    borderColor: "border-[#2c3863]",
-    textColor: "text-neutral-900",
-    image: "/projects/p5.png",
-  },
-]
+import { useLanguage } from "@/lib/language-context"
 
 export default function FeaturesSection() {
+  const { t } = useLanguage()
   const [activeFeature, setActiveFeature] = useState(1)
+
+  const features = [
+    {
+      id: 1,
+      category: t.features.projects.saas.category,
+      mobileCategory: t.features.projects.saas.mobileCategory,
+      title: "L u z",
+      description: t.features.projects.saas.description,
+      bgColor: "bg-[#ff4500]/25",
+      borderColor: "border-[#ff4500]",
+      textColor: "text-neutral-900",
+      image: "/projects/p1.png",
+    },
+    {
+      id: 2,
+      category: t.features.projects.corporate.category,
+      mobileCategory: t.features.projects.corporate.mobileCategory,
+      title: "Yarborough Law Group",
+      description: t.features.projects.corporate.description,
+      bgColor: "bg-[#936d47]/25",
+      borderColor: "border-[#936d47]",
+      textColor: "text-neutral-900",
+      image: "/projects/p2.png",
+    },
+    {
+      id: 3,
+      category: t.features.projects.ecommerce.category,
+      mobileCategory: t.features.projects.ecommerce.mobileCategory,
+      title: "TierraBlanca",
+      description: t.features.projects.ecommerce.description,
+      bgColor: "bg-[#415e5a]/25",
+      borderColor: "border-[#415e5a]",
+      textColor: "text-neutral-900",
+      image: "/projects/p3.png",
+    },
+    {
+      id: 4,
+      category: t.features.projects.association.category,
+      mobileCategory: t.features.projects.association.mobileCategory,
+      title: "Turâth",
+      description: t.features.projects.association.description,
+      bgColor: "bg-[#863a22]/25",
+      borderColor: "border-[#863a22]",
+      textColor: "text-neutral-900",
+      image: "/projects/p4.png",
+    },
+    {
+      id: 5,
+      category: t.features.projects.travel.category,
+      mobileCategory: t.features.projects.travel.mobileCategory,
+      title: "Marrakesh Travel Services",
+      description: t.features.projects.travel.description,
+      bgColor: "bg-[#2c3863]/25",
+      borderColor: "border-[#2c3863]",
+      textColor: "text-neutral-900",
+      image: "/projects/p5.png",
+    },
+  ]
 
   const currentFeature = features.find((f) => f.id === activeFeature) || features[0]
 

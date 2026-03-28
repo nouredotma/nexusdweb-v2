@@ -10,6 +10,7 @@ import {
   SliderContainer,
   useCarousel,
 } from "@/components/ui/carousel"
+import { useLanguage } from "@/lib/language-context"
 
 interface Review {
   id: number
@@ -17,116 +18,9 @@ interface Review {
   role: string
   avatar: string
   rating: number
-  review: React.ReactNode
+  review: string
   timeAgo: string
 }
-
-const reviews: Review[] = [
-  {
-    id: 1,
-    name: "Brandon Zell",
-    role: "Chief Accounting Officer",
-    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200&auto=format&fit=crop",
-    rating: 5,
-    review: (
-      <>
-        We needed a website that could match our brand&apos;s ambition — nexusdweb <strong>delivered beyond anything we imagined</strong>. Our bounce rate dropped 45% and enquiries tripled within weeks of launch.
-      </>
-    ),
-    timeAgo: "2 weeks ago",
-  },
-  {
-    id: 2,
-    name: "Sarah Harris",
-    role: "Marketing Director, Bloom Studio",
-    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop",
-    rating: 5,
-    review: (
-      <>
-        Their design instinct is unreal. We showed up with a mood board and left with a <strong>pixel-perfect, lightning-fast site</strong> that our competitors openly envy. The ROI paid for itself in the first month.
-      </>
-    ),
-    timeAgo: "1 month ago",
-  },
-  {
-    id: 3,
-    name: "Michael Chen",
-    role: "Operations Director",
-    avatar: "https://plus.unsplash.com/premium_photo-1675129779554-dc86569708c8?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    rating: 5,
-    review: (
-      <>
-        From discovery call to go-live in under 3 weeks — and the quality didn&apos;t suffer one bit. The site is blazing fast, SEO-ready, and our <strong>conversion rate jumped 40%</strong> on day one. Absolute professionals.
-      </>
-    ),
-    timeAgo: "3 weeks ago",
-  },
-  {
-    id: 4,
-    name: "Emily Rodriguez",
-    role: "Founder & CEO, Vellura",
-    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop",
-    rating: 5,
-    review: (
-      <>
-        After two failed attempts with other agencies, nexusdweb finally got it right. They listened, iterated fast, and built a website that <strong>actually sounds like us</strong>. Best decision we made all year.
-      </>
-    ),
-    timeAgo: "1 month ago",
-  },
-  {
-    id: 5,
-    name: "David Thompson",
-    role: "CEO, ThompsonTech",
-    avatar: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    rating: 5,
-    review: (
-      <>
-        Our old site was embarrassing — now clients literally compliment us on it during sales calls. nexusdweb turned our digital presence from a liability into our <strong>strongest asset</strong>.
-      </>
-    ),
-    timeAgo: "2 months ago",
-  },
-  {
-    id: 6,
-    name: "Amara Johnson",
-    role: "Head of Growth, Kinetic",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
-    rating: 5,
-    review: (
-      <>
-        They don&apos;t just build websites — <strong>they build revenue machines</strong>. Our new landing pages convert 3x better than what we had before. The team is sharp, responsive, and genuinely cares about results.
-      </>
-    ),
-    timeAgo: "3 weeks ago",
-  },
-  {
-    id: 7,
-    name: "James Whitfield",
-    role: "Managing Partner, Whitfield Legal",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop",
-    rating: 5,
-    review: (
-      <>
-        For a law firm, trust is everything — and our new site communicates exactly that. Clean, professional, mobile-first. We&apos;ve seen a <strong>60% increase in contact form submissions</strong> since launch.
-      </>
-    ),
-    timeAgo: "1 month ago",
-  },
-  {
-    id: 8,
-    name: "Priya Nair",
-    role: "Co-founder, Solace Wellness",
-    avatar: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=200&auto=format&fit=crop",
-    rating: 5,
-    review: (
-      <>
-        We run a wellness brand and needed a site that felt calming yet premium. nexusdweb nailed the aesthetic on the first draft. Our <strong>online bookings have doubled</strong> — can&apos;t recommend them enough.
-      </>
-    ),
-    timeAgo: "2 weeks ago",
-  },
-]
 
 function GoogleLogo({ className }: { className?: string }) {
   return (
@@ -158,7 +52,7 @@ function StarRating({ rating }: { rating: number }) {
 
 function ReviewCard({ review, index }: { review: Review; index: number }) {
   const { selectedIndex } = useCarousel()
-  const isCenter = index === selectedIndex
+  const { t } = useLanguage()
 
   return (
     <div
@@ -209,7 +103,7 @@ function ReviewCard({ review, index }: { review: Review; index: number }) {
         <div className="flex items-center gap-1.5 mt-auto pt-10 border-t border-gray-50">
           <GoogleLogo className="w-3.5 h-3.5" />
           <span className="text-[10px] sm:text-[11px] text-gray-400 font-medium">
-            Posted on Google
+            {t.testimonials.postedOnGoogle}
           </span>
         </div>
       </div>
@@ -218,11 +112,88 @@ function ReviewCard({ review, index }: { review: Review; index: number }) {
 }
 
 export default function TestimonialsSection() {
+  const { t } = useLanguage()
+
+  const reviews: Review[] = [
+    {
+      id: 1,
+      name: "Brandon Zell",
+      role: t.testimonials.reviews.brandon.role,
+      avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200&auto=format&fit=crop",
+      rating: 5,
+      review: t.testimonials.reviews.brandon.review,
+      timeAgo: t.testimonials.reviews.brandon.timeAgo,
+    },
+    {
+      id: 2,
+      name: "Sarah Harris",
+      role: t.testimonials.reviews.sarah.role,
+      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop",
+      rating: 5,
+      review: t.testimonials.reviews.sarah.review,
+      timeAgo: t.testimonials.reviews.sarah.timeAgo,
+    },
+    {
+      id: 3,
+      name: "Michael Chen",
+      role: t.testimonials.reviews.michael.role,
+      avatar: "https://plus.unsplash.com/premium_photo-1675129779554-dc86569708c8?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      rating: 5,
+      review: t.testimonials.reviews.michael.review,
+      timeAgo: t.testimonials.reviews.michael.timeAgo,
+    },
+    {
+      id: 4,
+      name: "Emily Rodriguez",
+      role: t.testimonials.reviews.emily.role,
+      avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop",
+      rating: 5,
+      review: t.testimonials.reviews.emily.review,
+      timeAgo: t.testimonials.reviews.emily.timeAgo,
+    },
+    {
+      id: 5,
+      name: "David Thompson",
+      role: t.testimonials.reviews.david.role,
+      avatar: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      rating: 5,
+      review: t.testimonials.reviews.david.review,
+      timeAgo: t.testimonials.reviews.david.timeAgo,
+    },
+    {
+      id: 6,
+      name: "Amara Johnson",
+      role: t.testimonials.reviews.amara.role,
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+      rating: 5,
+      review: t.testimonials.reviews.amara.review,
+      timeAgo: t.testimonials.reviews.amara.timeAgo,
+    },
+    {
+      id: 7,
+      name: "James Whitfield",
+      role: t.testimonials.reviews.james.role,
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop",
+      rating: 5,
+      review: t.testimonials.reviews.james.review,
+      timeAgo: t.testimonials.reviews.james.timeAgo,
+    },
+    {
+      id: 8,
+      name: "Priya Nair",
+      role: t.testimonials.reviews.priya.role,
+      avatar: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=200&auto=format&fit=crop",
+      rating: 5,
+      review: t.testimonials.reviews.priya.review,
+      timeAgo: t.testimonials.reviews.priya.timeAgo,
+    },
+  ]
+
   return (
     <section id="testimonials" className="w-full py-10 bg-background overflow-hidden scroll-mt-20">
       <div className="w-full">
         <h2 className="text-xl font-bold md:text-3xl lg:text-4xl text-center mb-4 sm:mb-6 text-balance flex items-center justify-center">
-          Don&apos;t just take our word for it
+          {t.testimonials.title}
           <span className="relative inline-flex items-center">
             <svg
               className="w-5 h-5 md:w-7 md:h-7 text-primary select-none pointer-events-none rotate-32 translate-y-0.5"

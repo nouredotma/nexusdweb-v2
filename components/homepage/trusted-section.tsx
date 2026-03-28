@@ -1,6 +1,9 @@
 "use client"
 
+import { useLanguage } from "@/lib/language-context"
+
 export default function TrustedSection() {
+  const { t } = useLanguage()
   // 14 company/brand images with black filter
   // 14 company/brand images with their official links
   const trustedData = [
@@ -24,18 +27,18 @@ export default function TrustedSection() {
     <section className="w-full py-5 px-2 sm:px-6 lg:px-8 bg-background">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-2">
-          <p className="text-black/50 font-bold text-xs md:text-md"> <span className="font-bold text-black">NexusDWeb</span> uses modern <span className="font-bold text-black">cutting-edge technologies</span> to build robust and scalable digital experiences.</p>
+          <p className="text-black/50 font-bold text-xs md:text-md"> <span className="font-bold text-black">{t.trusted.text.part1}</span>{t.trusted.text.part2}<span className="font-bold text-black">{t.trusted.text.part3}</span>{t.trusted.text.part4}</p>
         </div>
 
         {/* Mobile: Marquee Scrollers */}
         <div className="md:hidden">
           {/* Row 1: Forward Marquee */}
-          <div className="group flex overflow-hidden py-1 [--gap:0.5rem] [gap:var(--gap)] flex-row max-w-full [--duration:30s] [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+          <div className="group flex overflow-hidden py-1 [--gap:0.5rem] gap-(--gap) flex-row max-w-full [--duration:30s] mask-[linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
             {Array(4)
               .fill(0)
               .map((_, i) => (
                 <div
-                  className="flex shrink-0 justify-around [gap:var(--gap)] animate-marquee flex-row"
+                  className="flex shrink-0 justify-around gap-(--gap) animate-marquee flex-row"
                   key={i}
                 >
                   {trustedData.slice(0, 7).map((item, idx) => (
@@ -56,14 +59,14 @@ export default function TrustedSection() {
                 </div>
               ))}
           </div>
-
+ 
           {/* Row 2: Reverse Marquee */}
-          <div className="group flex overflow-hidden py-1 [--gap:0.5rem] [gap:var(--gap)] flex-row max-w-full [--duration:35s] [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+          <div className="group flex overflow-hidden py-1 [--gap:0.5rem] gap-(--gap) flex-row max-w-full [--duration:35s] mask-[linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
             {Array(4)
               .fill(0)
               .map((_, i) => (
                 <div
-                  className="flex shrink-0 justify-around [gap:var(--gap)] animate-marquee-reverse flex-row"
+                  className="flex shrink-0 justify-around gap-(--gap) animate-marquee-reverse flex-row"
                   key={i}
                 >
                   {trustedData.slice(7, 14).map((item, idx) => (

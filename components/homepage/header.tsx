@@ -5,9 +5,11 @@ import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion"
-import { Menu, X, Sun, Moon } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { AnimatedArrow } from "@/components/ui/animated-arrow"
+import { LanguageSwitcher } from "@/components/homepage/language-switcher"
+import { useLanguage } from "@/lib/language-context"
 
 interface NavItem {
   name: string
@@ -23,6 +25,7 @@ const HEADER_TRANSITION = {
 } as const
 
 export default function Header() {
+  const { t } = useLanguage()
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [hovered, setHovered] = useState<number | null>(null)
@@ -99,12 +102,12 @@ export default function Header() {
     }
   }
 
-  const navItems: NavItem[] = [
-    { name: "Our Work", href: "/#features" },
-    { name: "Services", href: "/#use-cases" },
-    { name: "Pricing", href: "/#pricing" },
-    { name: "Testimonials", href: "/#testimonials" },
-    { name: "FAQ", href: "/#faq" },
+  const navItems = [
+    { name: t.nav.work, href: "/#features" },
+    { name: t.nav.services, href: "/#use-cases" },
+    { name: t.nav.pricing, href: "/#pricing" },
+    { name: t.nav.testimonials, href: "/#testimonials" },
+    { name: t.nav.faq, href: "/#faq" },
   ]
 
   return (
@@ -168,22 +171,14 @@ export default function Header() {
                   : "bg-black text-white hover:bg-black/90 border border-black hover:border-black"
               }`}
             >
-              Get a Quote
+              {t.nav.getQuote}
               <AnimatedArrow 
                 wrapperClassName={visible ? "bg-black" : "bg-white"} 
                 arrowClassName={visible ? "text-white" : "text-black"} 
               />
             </Button>
           </Link>
-          <Button
-            className={`transition-all duration-300 relative z-30 rounded-sm h-13 w-13 p-0 flex items-center justify-center cursor-pointer ${
-              visible
-                ? "bg-primary text-white hover:bg-primary/90 border border-primary hover:border-primary"
-                : "bg-black text-white hover:bg-black/90 border border-black hover:border-black"
-            }`}
-          >
-            <Sun size={20} />
-          </Button>
+          <LanguageSwitcher />
         </div>
       </motion.div>
 
@@ -258,15 +253,11 @@ export default function Header() {
               <div className="w-full pt-6 border-t border-gray-100 flex items-center justify-between gap-3 px-2">
                 <Link href="/get-a-quote" className="flex-1 w-full" onClick={() => setMobileMenuOpen(false)}>
                   <Button className="group h-12 py-2 w-full bg-primary hover:bg-primary/90 text-white cursor-pointer rounded-full font-semibold text-sm shadow-sm flex items-center justify-between gap-2 transition-all duration-300">
-                    Get a Quote
+                    {t.nav.getQuote}
                     <AnimatedArrow wrapperClassName="bg-black shrink-0" arrowClassName="text-white" />
                   </Button>
                 </Link>
-                <Button
-                  className={`p-0 rounded-full h-12 w-12 flex items-center justify-center cursor-pointer transition-all duration-300 bg-gray-100 text-black hover:bg-gray-200 border border-gray-200`}
-                >
-                  <Sun size={20} />
-                </Button>
+                <LanguageSwitcher />
               </div>
             </motion.div>
           )}

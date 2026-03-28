@@ -15,7 +15,10 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip"
 
+import { useLanguage } from "@/lib/language-context"
+
 export default function HeroSection() {
+  const { t } = useLanguage()
   const [aiModalOpen, setAiModalOpen] = useState(false)
 
   return (
@@ -26,11 +29,11 @@ export default function HeroSection() {
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-2 md:px-6 lg:px-8 text-center">
           <div className="inline-flex mb-2 px-3 py-1.5 rounded-full bg-black">
-            <span className="text-[10px] md:text-sm font-bold shiny-sweep">Digital Experience Reimagined</span>
+            <span className="text-[10px] md:text-sm font-bold shiny-sweep">{t.hero.badge}</span>
           </div>
 
           <h1 className="text-4xl md:text-7xl font-bold mb-3 text-black px-2 md:px-0 tracking-tight">
-            Where visionaries{" "}
+            {t.hero.title.part1}{" "}
             <span className="inline-flex -space-x-3 -translate-x-2">
               <img
                 src="https://images.unsplash.com/photo-1654110455429-cf322b40a906?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=880"
@@ -48,9 +51,9 @@ export default function HeroSection() {
                 className="h-9 md:h-14 rounded-full border-2 md:border-4 border-[#f0f6fe] translate-y-1 md:translate-y-1.5"
               />
             </span>
-            build <br className="hidden md:block" /> their digital{" "}
+            {t.hero.title.build} <br className="hidden md:block" /> {t.hero.title.part2}{" "}
             <span className="relative inline-block cursor-default group">
-              <span className="relative z-10">presence</span>
+              <span className="relative z-10">{t.hero.title.presence}</span>
               <svg
                 className="absolute bottom-0 left-0 w-full h-[10px] md:h-[14px] text-primary select-none pointer-events-none"
                 viewBox="0 0 200 40"
@@ -74,16 +77,16 @@ export default function HeroSection() {
           </h1>
 
           <p className="text-xs md:text-xl font-medium text-muted-foreground mb-8 max-w-2xl mx-auto">
-            We partner with ambitious individuals and teams to craft stunning websites, powerful platforms, and smart growth strategies.
+            {t.hero.description}
           </p>
 
           <div className="flex flex-row gap-2 md:gap-4 justify-center">
             <Link href="/get-a-quote">
               <Button
                 size="lg"
-                className="group bg-white hover:bg-white/90 border-2 border-gray text-black font-bold rounded-full pl-2 pr-1 py-1 md:pl-4 md:pr-2 md:py-2 cursor-pointer text-xs md:text-sm h-auto flex items-center gap-2 transition-all duration-300"
+                className="group bg-white hover:bg-white/90 border-2 border-black text-black font-bold rounded-full pl-2 pr-1 py-1 md:pl-4 md:pr-2 md:py-2 cursor-pointer text-xs md:text-sm h-auto flex items-center gap-2 transition-all duration-300"
               >
-                Start Your Project
+                {t.hero.startProject}
                 <AnimatedArrow wrapperClassName="bg-black shrink-0" arrowClassName="text-white" />
               </Button>
             </Link>
@@ -102,7 +105,7 @@ export default function HeroSection() {
                 size="lg"
                 className="group bg-black hover:bg-black/90 text-white border-2 border-black font-bold rounded-full pl-2 pr-1 py-1 md:pl-4 md:pr-2 md:py-2 cursor-pointer text-xs md:text-sm h-auto flex items-center gap-2 transition-all duration-300"
               >
-                View Services
+                {t.hero.viewServices}
                 <AnimatedArrow wrapperClassName="bg-white shrink-0" arrowClassName="text-black" />
               </Button>
             </Link>
@@ -110,7 +113,7 @@ export default function HeroSection() {
         </div>
 
         {/* Nexus AI Assistant Button — Bottom Left (Fixed) */}
-        <div className="fixed bottom-3 left-3 md:bottom-6 md:left-6 z-50">
+        <div className="fixed bottom-3 left-3 md:bottom-6 md:left-6 z-50 flex flex-col items-center">
           <Tooltip>
             <TooltipTrigger asChild>
               <motion.button
@@ -118,7 +121,7 @@ export default function HeroSection() {
                 className="group relative flex items-center justify-center w-12 h-12 md:w-18 md:h-18 bg-white rounded-sm md:rounded-lg transition-all duration-300 cursor-pointer overflow-hidden border border-neutral-100"
                 whileTap={{ scale: 0.95 }}
                 whileHover={{ scale: 1.05 }}
-                aria-label="Ask Nexus AI"
+                aria-label={t.hero.askAi}
               >
                 {/* Google Color Ring Effect */}
                 <div className="absolute inset-0 p-[2.5px] overflow-hidden rounded-[inherit] pointer-events-none">
@@ -137,47 +140,37 @@ export default function HeroSection() {
               </motion.button>
             </TooltipTrigger>
             <TooltipContent side="top" sideOffset={1}>
-              Ask Nexus AI
+              {t.hero.askAi}
             </TooltipContent>
           </Tooltip>
         </div>
 
         {/* Contact Links — Bottom Right */}
         <div className="absolute bottom-3 right-3 md:bottom-6 md:right-6 z-20 flex flex-row items-center gap-2">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link 
-                href="https://wa.me/212660715095" 
-                target="_blank" 
-                className="text-neutral-400 hover:text-black border-2 border-neutral-200 hover:border-neutral-400 p-2.5 md:p-3 rounded-full transition-all duration-300"
-                aria-label="WhatsApp"
-              >
-                <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 md:w-6 md:h-6 fill-current">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                </svg>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="top" sideOffset={1}>
-              Chat on WhatsApp
-            </TooltipContent>
-          </Tooltip>
+          <Link 
+            href="https://wa.me/212660715095" 
+            target="_blank" 
+            className="text-[#25D366] border-2 border-[#25D366]/20 hover:border-[#25D366] hover:bg-[#25D366]/5 p-2.5 md:p-3 rounded-full transition-all duration-300"
+            aria-label="WhatsApp"
+          >
+            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 md:w-6 md:h-6 fill-current">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+          </Link>
 
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link 
-                href="mailto:omar@nexusdweb.com" 
-                className="text-neutral-400 hover:text-black border-2 border-neutral-200 hover:border-neutral-400 p-2.5 md:p-3 rounded-full transition-all duration-300"
-                aria-label="Email"
-              >
-                <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 md:w-6 md:h-6 fill-current">
-                  <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L12 9.573l8.073-6.08c1.618-1.214 3.927-.059 3.927 1.964z"/>
-                </svg>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="top" sideOffset={1}>
-              Send an Email
-            </TooltipContent>
-          </Tooltip>
+          <Link 
+            href="mailto:omar@nexusdweb.com" 
+            className="border-2 border-[#EA4335]/20 hover:border-[#EA4335] hover:bg-[#EA4335]/5 p-2.5 md:p-3 rounded-full transition-all duration-300"
+            aria-label="Email"
+          >
+            <svg viewBox="52 42 88 66" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 md:w-6 md:h-6">
+              <path fill="#4285f4" d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"/>
+              <path fill="#34a853" d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"/>
+              <path fill="#fbbc04" d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"/>
+              <path fill="#ea4335" d="M72 74V48l24 18 24-18v26L96 92"/>
+              <path fill="#c5221f" d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"/>
+            </svg>
+          </Link>
         </div>
 
         {/* AI Assistant Modal */}

@@ -4,6 +4,7 @@ import { Urbanist, Caveat } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import Preloader from "@/components/homepage/preloader"
+import { LanguageProvider } from "@/lib/language-context"
 
 const urbanist = Urbanist({ subsets: ["latin"] })
 const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" })
@@ -116,7 +117,9 @@ export default function RootLayout({
           }}
         />
         <Preloader />
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
         <Analytics />
       </body>
     </html>

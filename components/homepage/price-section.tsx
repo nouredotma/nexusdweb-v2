@@ -4,70 +4,46 @@ import { PricingCard, type PricingTier } from "@/components/ui/pricing-card"
 import { motion } from "framer-motion"
 
 import { Zap, Rocket, Building2 } from "lucide-react"
-
-const TIERS: PricingTier[] = [
-  {
-    name: "Starter",
-    price: 500,
-    description: "Perfect for individuals and small projects",
-    features: [
-      "Responsive Web Design",
-      "Up to 5 Pages",
-      "Basic SEO Setup",
-      "Contact Form Integration",
-      "Mobile Optimization",
-      "1 Month Support",
-      "Social Media Integration",
-      "Basic Analytics Setup",
-    ],
-    limitations: ["Advanced SEO Optimization", "E-commerce Integration", "Custom Web Application"],
-    cta: "Get started",
-    link: "https://nexusdweb.vercel.app",
-    primaryBorder: true,
-    icon: Zap,
-  },
-  {
-    name: "Professional",
-    price: 800,
-    description: "For growing teams and businesses",
-    features: [
-      "Everything in Starter",
-      "Up to 15 Pages",
-      "Advanced SEO Optimization",
-      "E-commerce Integration",
-      "Custom Animations",
-      "3 Months Support",
-      "Advanced Analytics",
-      "Performance Optimization",
-    ],
-    limitations: ["Custom Web Application", "Custom CMS", "Priority Development"],
-    cta: "Get started",
-    link: "https://nexusdweb.vercel.app",
-    popular: true,
-    icon: Rocket,
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    description: "For large-scale operations",
-    features: [
-      "Everything in Pro",
-      "Unlimited Pages",
-      "Custom Web Application",
-      "Advanced Integrations",
-      "Premium Support",
-      "6 Months Support",
-      "Custom CMS",
-      "Priority Development",
-    ],
-    limitations: [],
-    cta: "Get started",
-    link: "https://nexusdweb.vercel.app",
-    icon: Building2,
-  },
-]
+import { useLanguage } from "@/lib/language-context"
 
 export default function PriceSection() {
+  const { t } = useLanguage()
+
+  const TIERS: (PricingTier & { limitations: string[] })[] = [
+    {
+      name: t.pricing.tiers.starter.name,
+      price: 500,
+      description: t.pricing.tiers.starter.description,
+      features: t.pricing.tiers.starter.features,
+      limitations: t.pricing.tiers.starter.limitations,
+      cta: t.pricing.tiers.starter.cta,
+      link: "https://nexusdweb.vercel.app",
+      primaryBorder: true,
+      icon: Zap,
+    },
+    {
+      name: t.pricing.tiers.professional.name,
+      price: 800,
+      description: t.pricing.tiers.professional.description,
+      features: t.pricing.tiers.professional.features,
+      limitations: t.pricing.tiers.professional.limitations,
+      cta: t.pricing.tiers.professional.cta,
+      link: "https://nexusdweb.vercel.app",
+      popular: true,
+      icon: Rocket,
+    },
+    {
+      name: t.pricing.tiers.enterprise.name,
+      price: t.pricing.tiers.enterprise.price,
+      description: t.pricing.tiers.enterprise.description,
+      features: t.pricing.tiers.enterprise.features,
+      limitations: t.pricing.tiers.enterprise.limitations,
+      cta: t.pricing.tiers.enterprise.cta,
+      link: "https://nexusdweb.vercel.app",
+      icon: Building2,
+    },
+  ]
+
   return (
     <section id="pricing" className="w-full py-10 px-2 sm:px-6 lg:px-8 bg-background overflow-hidden scroll-mt-20">
       <div className="max-w-7xl  mx-auto">
@@ -75,9 +51,9 @@ export default function PriceSection() {
           <div className="space-y-2 text-center">
             <div className="space-y-1">
               <h1 className="text-xl font-bold md:text-4xl text-balance">
-                Simple, Transparent{" "}
+                {t.pricing.title}{" "}
                 <span className="relative inline-block">
-                  <span className="relative z-10">Pricing</span>
+                  <span className="relative z-10">{t.pricing.pricing}</span>
                   <svg
                     className="absolute -inset-x-2.5 -inset-y-2.5 w-[calc(100%+20px)] h-[calc(100%+20px)] text-primary select-none pointer-events-none -rotate-12"
                     viewBox="0 0 160 60"
@@ -98,7 +74,7 @@ export default function PriceSection() {
                   </svg>
                 </span>
               </h1>
-              <p className="text-muted-foreground text-sm md:text-base">Choose the perfect plan for your needs</p>
+              <p className="text-muted-foreground text-sm md:text-base">{t.pricing.subtitle}</p>
             </div>
           </div>
 
