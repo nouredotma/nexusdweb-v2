@@ -241,7 +241,7 @@ export default function Footer() {
  
         {/* Row 2: Large bold agency name */}
         <div className="relative flex justify-center py-2 md:py-4">
-          <h2 className="text-6xl md:text-[17vw] font-bold text-primary-foreground tracking-tight text-center leading-none whitespace-nowrap pointer-events-none">
+          <h2 className="text-[15vw] md:text-[15.5vw] text-primary-foreground tracking-tight text-center leading-none whitespace-nowrap pointer-events-none font-byte-sharp">
             nexusdweb
           </h2>
         </div>

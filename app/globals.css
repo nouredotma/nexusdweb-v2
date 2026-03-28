@@ -1,3 +1,4 @@
+@import url('https://fonts.cdnfonts.com/css/byte-sharp-133638');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -222,5 +223,9 @@
   -webkit-text-fill-color: transparent;
   animation: shiny-sweep 4s linear infinite;
   display: inline-block;
+}
+
+.font-byte-sharp {
+  font-family: 'Byte Sharp', sans-serif;
 }
 
