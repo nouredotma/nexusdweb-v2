@@ -23,6 +23,10 @@ export interface Translations {
     askAi: string;
     chatWhatsApp: string;
     sendEmail: string;
+    stats: {
+      solutions: { value: string; label: string };
+      experience: { value: string; label: string };
+    };
   };
   trusted: {
     text: {
@@ -246,6 +250,10 @@ export const translations: Record<Language, Translations> = {
       askAi: "Ask Nexus AI",
       chatWhatsApp: "Chat on WhatsApp",
       sendEmail: "Send an Email",
+      stats: {
+        solutions: { value: "500", label: "Digital Solutions" },
+        experience: { value: "12", label: "Years of Experience" },
+      },
     },
     trusted: {
       text: {
@@ -332,7 +340,7 @@ export const translations: Record<Language, Translations> = {
         starter: {
           name: "Starter",
           description: "Perfect for individuals and small projects",
-          cta: "Get started",
+          cta: "Order Now",
           features: [
             "Responsive Web Design",
             "Up to 5 Pages",
@@ -348,7 +356,7 @@ export const translations: Record<Language, Translations> = {
         professional: {
           name: "Professional",
           description: "For growing teams and businesses",
-          cta: "Get started",
+          cta: "Order Now",
           features: [
             "Everything in Starter",
             "Up to 15 Pages",
@@ -365,7 +373,7 @@ export const translations: Record<Language, Translations> = {
           name: "Enterprise",
           price: "Custom",
           description: "For large-scale operations",
-          cta: "Get started",
+          cta: "Get a Quote",
           features: [
             "Everything in Pro",
             "Unlimited Pages",
@@ -616,6 +624,10 @@ export const translations: Record<Language, Translations> = {
       askAi: "Demander à l'IA Nexus",
       chatWhatsApp: "Discuter sur WhatsApp",
       sendEmail: "Envoyer un email",
+      stats: {
+        solutions: { value: "500", label: "Solutions Digitales" },
+        experience: { value: "12", label: "Années d'Expérience" },
+      },
     },
     trusted: {
       text: {
@@ -702,7 +714,7 @@ export const translations: Record<Language, Translations> = {
         starter: {
           name: "Starter",
           description: "Parfait pour les particuliers et les petits projets",
-          cta: "Commencer",
+          cta: "Commander",
           features: [
             "Design Web Réactif",
             "Jusqu'à 5 Pages",
@@ -718,7 +730,7 @@ export const translations: Record<Language, Translations> = {
         professional: {
           name: "Professionnel",
           description: "Pour les équipes et entreprises en croissance",
-          cta: "Commencer",
+          cta: "Commander",
           features: [
             "Tout ce qui est dans Starter",
             "Jusqu'à 15 Pages",
@@ -735,7 +747,7 @@ export const translations: Record<Language, Translations> = {
           name: "Entreprise",
           price: "Sur Mesure",
           description: "Pour les opérations à grande échelle",
-          cta: "Commencer",
+          cta: "Obtenir un devis",
           features: [
             "Tout ce qui est dans Pro",
             "Pages Illimitées",
@@ -986,6 +998,10 @@ export const translations: Record<Language, Translations> = {
       askAi: "Preguntar a Nexus AI",
       chatWhatsApp: "Chat por WhatsApp",
       sendEmail: "Enviar un Email",
+      stats: {
+        solutions: { value: "500", label: "Soluciones Digitales" },
+        experience: { value: "12", label: "Años de Experiencia" },
+      },
     },
     trusted: {
       text: {
@@ -1072,7 +1088,7 @@ export const translations: Record<Language, Translations> = {
         starter: {
           name: "Starter",
           description: "Perfecto para individuos y proyectos pequeños",
-          cta: "Empezar",
+          cta: "Ordenar ahora",
           features: [
             "Diseño Web Responsivo",
             "Hasta 5 Páginas",
@@ -1088,7 +1104,7 @@ export const translations: Record<Language, Translations> = {
         professional: {
           name: "Profesional",
           description: "Para equipos y empresas en crecimiento",
-          cta: "Empezar",
+          cta: "Ordenar ahora",
           features: [
             "Todo lo de Starter",
             "Hasta 15 Páginas",
@@ -1105,7 +1121,7 @@ export const translations: Record<Language, Translations> = {
           name: "Enterprise",
           price: "Personalizado",
           description: "Para operaciones a gran escala",
-          cta: "Empezar",
+          cta: "Obtener presupuesto",
           features: [
             "Todo lo de Pro",
             "Páginas Ilimitadas",

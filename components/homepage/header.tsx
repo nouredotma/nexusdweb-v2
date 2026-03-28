@@ -220,7 +220,7 @@ export default function Header() {
             <motion.div
               key="mobile-menu-content"
               ref={menuRef}
-              className="absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-xs bg-white px-4 py-8 shadow-2xl"
+              className="absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-xs bg-white px-2 py-8 shadow-2xl"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
@@ -237,7 +237,7 @@ export default function Header() {
                   >
                     <Link
                       href={item.href}
-                      className={`flex items-center py-3 px-4 rounded-sm font-medium text-base transition-all cursor-pointer ${
+                      className={`flex items-center py-3 px-2 rounded-sm font-medium text-base transition-all cursor-pointer ${
                         pathname && pathname === item.href
                           ? "bg-gray-100 text-primary"
                           : "text-gray-800 hover:bg-gray-50"
@@ -257,7 +257,7 @@ export default function Header() {
                     <AnimatedArrow wrapperClassName="bg-black shrink-0" arrowClassName="text-white" />
                   </Button>
                 </Link>
-                <LanguageSwitcher />
+                <LanguageSwitcher align="right" />
               </div>
             </motion.div>
           )}

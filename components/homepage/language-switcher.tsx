@@ -29,7 +29,11 @@ const languages: Language[] = [
   },
 ]
 
-export function LanguageSwitcher() {
+interface LanguageSwitcherProps {
+  align?: "left" | "center" | "right"
+}
+
+export function LanguageSwitcher({ align = "center" }: LanguageSwitcherProps) {
   const [isOpen, setIsOpen] = useState(false)
   const { language: currentLangCode, setLanguage } = useLanguage()
   const currentLang = languages.find((lang) => lang.code === currentLangCode) || languages[0]
@@ -60,7 +64,9 @@ export function LanguageSwitcher() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute top-full mt-3 left-1/2 -translate-x-1/2 flex flex-col gap-1.5 p-1.5 md:p-2 bg-white/90 backdrop-blur-md border-2 border-neutral-200 rounded-2xl md:rounded-full z-10001 min-w-[120px] md:min-w-0"
+            className={`absolute top-full mt-3 flex flex-col gap-1.5 p-1.5 md:p-2 bg-white/90 backdrop-blur-md border-2 border-neutral-200 rounded-2xl md:rounded-full z-10001 min-w-[120px] md:min-w-0 ${
+              align === "center" ? "left-1/2 -translate-x-1/2" : align === "right" ? "right-0" : "left-0"
+            }`}
           >
             {languages
               .filter((lang) => lang.code !== currentLang.code)

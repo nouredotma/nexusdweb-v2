@@ -1,12 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { AnimatedArrow } from "@/components/ui/animated-arrow"
 import { NexusRobotIcon } from "@/components/ui/nexus-robot-icon"
 import { AiAssistantModal } from "@/components/homepage/ai-assistant-modal"
+import { HeroStats } from "@/components/homepage/hero-stats"
 
 import {
   Tooltip,
@@ -20,6 +21,15 @@ import { useLanguage } from "@/lib/language-context"
 export default function HeroSection() {
   const { t } = useLanguage()
   const [aiModalOpen, setAiModalOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
     <TooltipProvider delayDuration={0}>
@@ -112,6 +122,11 @@ export default function HeroSection() {
           </div>
         </div>
 
+        {/* Hero Stats — Bottom Left */}
+        <div className="absolute bottom-3 right-3 md:bottom-6 md:right-6 z-10">
+          <HeroStats stats={t.hero.stats} />
+        </div>
+
         {/* Nexus AI Assistant Button — Bottom Left (Fixed) */}
         <div className="fixed bottom-3 left-3 md:bottom-6 md:left-6 z-50 flex flex-col items-center">
           <Tooltip>
@@ -145,12 +160,20 @@ export default function HeroSection() {
           </Tooltip>
         </div>
 
-        {/* Contact Links — Bottom Right */}
-        <div className="absolute bottom-3 right-3 md:bottom-6 md:right-6 z-20 flex flex-row items-center gap-2">
+        {/* Contact Links — Desktop: Right Center (Within Section) | Mobile: Bottom Right (Fixed on scroll) */}
+        <div className={`
+          z-50 flex flex-col items-center gap-1 md:gap-3 transition-all duration-500
+          /* Mobile styles: Fixed to viewport */
+          fixed bottom-3 right-2
+          ${scrolled ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-10 pointer-events-none"}
+          /* Desktop styles: Absolute to Hero section */
+          md:absolute md:top-1/2 md:bottom-auto md:right-6 md:-translate-y-1/2 md:opacity-100 md:pointer-events-auto
+        `}>
+
           <Link 
             href="https://wa.me/212660715095" 
             target="_blank" 
-            className="text-[#25D366] border-2 border-[#25D366]/20 hover:border-[#25D366] hover:bg-[#25D366]/5 p-2.5 md:p-3 rounded-full transition-all duration-300"
+            className="text-white md:text-[#25D366] border-2 border-[#25D366]/20 hover:border-[#25D366] bg-[#25D366] md:bg-white hover:bg-[#25D366]/5 p-2.5 md:p-3 rounded-full transition-all duration-300"
             aria-label="WhatsApp"
           >
             <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 md:w-6 md:h-6 fill-current">
@@ -160,7 +183,7 @@ export default function HeroSection() {
 
           <Link 
             href="mailto:omar@nexusdweb.com" 
-            className="border-2 border-[#EA4335]/20 hover:border-[#EA4335] hover:bg-[#EA4335]/5 p-2.5 md:p-3 rounded-full transition-all duration-300"
+            className="border-2 border-[#EA4335]/20  hover:border-[#EA4335] bg-white hover:bg-[#EA4335]/5 p-2.5 md:p-3 rounded-full transition-all duration-300"
             aria-label="Email"
           >
             <svg viewBox="52 42 88 66" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 md:w-6 md:h-6">
