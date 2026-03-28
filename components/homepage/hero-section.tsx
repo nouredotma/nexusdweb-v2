@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { MeshGradient } from "@paper-design/shaders-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { motion } from "framer-motion"
@@ -22,6 +23,8 @@ export default function HeroSection() {
   const { t } = useLanguage()
   const [aiModalOpen, setAiModalOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [dimensions, setDimensions] = useState({ width: 1920, height: 1080 })
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,10 +34,40 @@ export default function HeroSection() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  useEffect(() => {
+    setMounted(true)
+    const update = () =>
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      })
+    update()
+    window.addEventListener("resize", update)
+    return () => window.removeEventListener("resize", update)
+  }, [])
+
   return (
     <TooltipProvider delayDuration={0}>
       <section className="relative w-full h-svh flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 w-full h-full bg-transparent" />
+        <div className="absolute inset-0 w-full h-full">
+          {mounted && (
+            <>
+              <MeshGradient
+                width={dimensions.width}
+                height={dimensions.height}
+                colors={["#ffffff", "#ffffff", "#e0efff", "#8BB8F3", "#f0f7ff", "#ffffff"]}
+                distortion={1.2}
+                swirl={0.6}
+                grainMixer={0}
+                grainOverlay={0}
+                speed={0.8}
+                offsetX={0.08}
+              />
+            </>
+          )}
+          {/* Bottom Fade Gradient */}
+          <div className="absolute bottom-0 left-0 right-0 h-20 md:h-40 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+        </div>
 
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-2 md:px-6 lg:px-8 text-center">
@@ -86,7 +119,7 @@ export default function HeroSection() {
             .
           </h1>
 
-          <p className="text-xs md:text-xl font-medium text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <p className="text-xs md:text-xl font-medium text-neutral-500 mb-8 max-w-2xl mx-auto">
             {t.hero.description}
           </p>
 
@@ -94,7 +127,7 @@ export default function HeroSection() {
             <Link href="/get-a-quote">
               <Button
                 size="lg"
-                className="group bg-white hover:bg-white/90 border-2 border-black text-black font-bold rounded-full pl-2 pr-1 py-1 md:pl-4 md:pr-2 md:py-2 cursor-pointer text-xs md:text-sm h-auto flex items-center gap-2 transition-all duration-300"
+                className="group bg-white hover:bg-white/90 border-2 border-neutral-200 text-black font-bold rounded-full pl-2 pr-1 py-1 md:pl-4 md:pr-2 md:py-2 cursor-pointer text-xs md:text-sm h-auto flex items-center gap-2 transition-all duration-300"
               >
                 {t.hero.startProject}
                 <AnimatedArrow wrapperClassName="bg-black shrink-0" arrowClassName="text-white" />
@@ -160,20 +193,17 @@ export default function HeroSection() {
           </Tooltip>
         </div>
 
-        {/* Contact Links — Desktop: Right Center (Within Section) | Mobile: Bottom Right (Fixed on scroll) */}
+        {/* Contact Links — Fixed Bottom Right (Appears on scroll) */}
         <div className={`
-          z-50 flex flex-col items-center gap-1 md:gap-3 transition-all duration-500
-          /* Mobile styles: Fixed to viewport */
-          fixed bottom-3 right-2
+          z-50 flex flex-col items-center gap-1 transition-all duration-500
+          fixed bottom-3 right-2 md:bottom-6 md:right-6
           ${scrolled ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-10 pointer-events-none"}
-          /* Desktop styles: Absolute to Hero section */
-          md:absolute md:top-1/2 md:bottom-auto md:right-6 md:-translate-y-1/2 md:opacity-100 md:pointer-events-auto
         `}>
 
           <Link 
             href="https://wa.me/212660715095" 
             target="_blank" 
-            className="text-white md:text-[#25D366] border-2 border-[#25D366]/20 hover:border-[#25D366] bg-[#25D366] md:bg-white hover:bg-[#25D366]/5 p-2.5 md:p-3 rounded-full transition-all duration-300"
+            className="text-white border-2 border-[#25D366]/20 hover:border-[#25D366] bg-[#25D366] p-2.5 md:p-3 rounded-full transition-all duration-300"
             aria-label="WhatsApp"
           >
             <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 md:w-6 md:h-6 fill-current">
@@ -183,7 +213,7 @@ export default function HeroSection() {
 
           <Link 
             href="mailto:omar@nexusdweb.com" 
-            className="border-2 border-[#EA4335]/20  hover:border-[#EA4335] bg-white hover:bg-[#EA4335]/5 p-2.5 md:p-3 rounded-full transition-all duration-300"
+            className="border-2 border-neutral-200 bg-white p-2.5 md:p-3 rounded-full transition-all duration-300"
             aria-label="Email"
           >
             <svg viewBox="52 42 88 66" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 md:w-6 md:h-6">

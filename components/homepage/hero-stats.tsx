@@ -28,14 +28,14 @@ function StatItem({ value: targetValueStr, label }: StatItemProps) {
   }, [count, targetValue])
 
   return (
-    <div className="flex flex-col items-start gap-0.5 pointer-events-none select-none">
+    <div className="flex flex-col items-start gap-0.5 pointer-events-none select-none" style={{ fontFamily: "var(--font-caveat)" }}>
       <div className="flex items-center gap-1">
-        <span className="text-sm md:text-2xl font-bold text-neutral-400 tabular-nums">
+        <span className="text-sm md:text-3xl font-bold text-neutral-700 tabular-nums">
           {displayValue}
         </span>
-        <span className="text-sm md:text-xl font-bold text-neutral-400">+</span>
+        <span className="text-sm md:text-2xl font-bold text-neutral-700">+</span>
       </div>
-      <span className="text-xs md:text-sm font-medium text-neutral-400/60 whitespace-nowrap tracking-wider">
+      <span className="text-[10px] md:text-lg font-medium text-neutral-700/60 whitespace-nowrap tracking-wider">
         {label}
       </span>
     </div>
