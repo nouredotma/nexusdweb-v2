@@ -1,14 +1,23 @@
 "use client";
 
 import { ChevronRight } from "lucide-react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function Footer() {
+  const pathname = usePathname();
+
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith("#")) {
-      e.preventDefault()
-      const destination = document.querySelector(href)
-      if (destination) {
-        destination.scrollIntoView({ behavior: "smooth" })
+    const isAnchor = href.startsWith("#") || href.includes("#")
+    if (isAnchor) {
+      const hash = href.includes("#") ? `#${href.split("#")[1]}` : href
+      
+      if (pathname === "/") {
+        e.preventDefault()
+        const destination = document.querySelector(hash)
+        if (destination) {
+          destination.scrollIntoView({ behavior: "smooth" })
+        }
       }
     }
   }
@@ -25,54 +34,53 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 text-sm p-0 list-none">
               <li>
-                <a
-                  href="#"
-                  onClick={(e) => handleScroll(e, "#")}
+                <Link
+                  href="/"
                   className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
                 >
                   <ChevronRight size={14} className="-ml-1" />
                   <span>Home</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#features"
-                  onClick={(e) => handleScroll(e, "#features")}
+                <Link
+                  href="/#features"
+                  onClick={(e) => handleScroll(e, "/#features")}
                   className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
                 >
                   <ChevronRight size={14} className="-ml-1" />
                   <span>Our Work</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#use-cases"
-                  onClick={(e) => handleScroll(e, "#use-cases")}
+                <Link
+                  href="/#use-cases"
+                  onClick={(e) => handleScroll(e, "/#use-cases")}
                   className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
                 >
                   <ChevronRight size={14} className="-ml-1" />
                   <span>Services</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#testimonials"
-                  onClick={(e) => handleScroll(e, "#testimonials")}
+                <Link
+                  href="/#testimonials"
+                  onClick={(e) => handleScroll(e, "/#testimonials")}
                   className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
                 >
                   <ChevronRight size={14} className="-ml-1" />
                   <span>Testimonials</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#pricing"
-                  onClick={(e) => handleScroll(e, "#pricing")}
+                <Link
+                  href="/#pricing"
+                  onClick={(e) => handleScroll(e, "/#pricing")}
                   className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
                 >
                   <ChevronRight size={14} className="-ml-1" />
                   <span>Pricing</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -84,24 +92,24 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 text-sm p-0 list-none">
               <li>
-                <a
-                  href="#features"
-                  onClick={(e) => handleScroll(e, "#features")}
+                <Link
+                  href="/#features"
+                  onClick={(e) => handleScroll(e, "/#features")}
                   className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
                 >
                   <ChevronRight size={14} className="-ml-1" />
                   <span>Our Work</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#faq"
-                  onClick={(e) => handleScroll(e, "#faq")}
+                <Link
+                  href="/#faq"
+                  onClick={(e) => handleScroll(e, "/#faq")}
                   className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
                 >
                   <ChevronRight size={14} className="-ml-1" />
                   <span>FAQ</span>
-                </a>
+                </Link>
               </li>
               <li>
                 <div className="text-white/40 pointer-events-none font-medium flex items-center gap-0 cursor-not-allowed">

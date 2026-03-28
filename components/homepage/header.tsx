@@ -82,22 +82,29 @@ export default function Header() {
   }, [mobileMenuOpen])
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith("#")) {
-      e.preventDefault()
-      const destination = document.querySelector(href)
-      if (destination) {
-        destination.scrollIntoView({ behavior: "smooth" })
+    const isAnchor = href.startsWith("#") || href.includes("#")
+    if (isAnchor) {
+      const hash = href.includes("#") ? `#${href.split("#")[1]}` : href
+      
+      if (pathname === "/") {
+        e.preventDefault()
+        const destination = document.querySelector(hash)
+        if (destination) {
+          destination.scrollIntoView({ behavior: "smooth" })
+        }
+        setMobileMenuOpen(false)
+      } else {
+        setMobileMenuOpen(false)
       }
-      setMobileMenuOpen(false)
     }
   }
 
   const navItems: NavItem[] = [
-    { name: "Our Work", href: "#features" },
-    { name: "Services", href: "#use-cases" },
-    { name: "Pricing", href: "#pricing" },
-    { name: "Testimonials", href: "#testimonials" },
-    { name: "FAQ", href: "#faq" },
+    { name: "Our Work", href: "/#features" },
+    { name: "Services", href: "/#use-cases" },
+    { name: "Pricing", href: "/#pricing" },
+    { name: "Testimonials", href: "/#testimonials" },
+    { name: "FAQ", href: "/#faq" },
   ]
 
   return (
@@ -153,7 +160,7 @@ export default function Header() {
         </div>
 
         <div className="hidden md:flex items-center justify-end relative z-30 gap-2">
-          <Link href="#contact" className="relative z-30">
+          <Link href="/get-a-quote" className="relative z-30">
             <Button
               className={`group transition-all duration-300 rounded-full h-13 pl-4 pr-2 py-2 font-semibold text-sm cursor-pointer flex items-center gap-2 ${
                 visible
@@ -251,7 +258,7 @@ export default function Header() {
               </div>
 
               <div className="w-full pt-6 border-t border-gray-100 flex items-center justify-between gap-3 px-2">
-                <Link href="#contact" className="flex-1 w-full">
+                <Link href="/get-a-quote" className="flex-1 w-full" onClick={() => setMobileMenuOpen(false)}>
                   <Button className="group h-12 py-2 w-full bg-primary hover:bg-primary/90 text-white cursor-pointer rounded-full font-semibold text-sm shadow-sm flex items-center justify-between gap-2 transition-all duration-300">
                     Get a Quote
                     <AnimatedArrow wrapperClassName="bg-black shrink-0" arrowClassName="text-white" />
