@@ -74,16 +74,6 @@ export default function Footer() {
                   <span>Pricing</span>
                 </a>
               </li>
-              <li>
-                <a
-                  href="#contact"
-                  onClick={(e) => handleScroll(e, "#contact")}
-                  className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
-                >
-                  <ChevronRight size={14} className="-ml-1" />
-                  <span>Contact</span>
-                </a>
-              </li>
             </ul>
           </div>
 
