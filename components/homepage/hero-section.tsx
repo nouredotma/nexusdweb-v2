@@ -29,7 +29,7 @@ export default function HeroSection() {
             <span className="text-[10px] md:text-sm font-bold shiny-sweep">Digital Experience Reimagined</span>
           </div>
 
-          <h1 className="text-3xl md:text-7xl font-bold mb-3 text-black px-2 md:px-0 tracking-tight">
+          <h1 className="text-4xl md:text-7xl font-bold mb-3 text-black px-2 md:px-0 tracking-tight">
             Where visionaries{" "}
             <span className="inline-flex -space-x-3 -translate-x-2">
               <img
