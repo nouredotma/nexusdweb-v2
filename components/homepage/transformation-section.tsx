@@ -93,7 +93,7 @@ function StepCard({
                 loop
                 muted
                 playsInline
-                className="absolute inset-0 w-full h-full object-cover object-bottom opacity-50 pointer-events-none"
+                className="absolute inset-0 w-full h-full object-cover object-bottom opacity-60 pointer-events-none"
               />
               <span
                 className="text-9xl tracking-tighter leading-none text-white relative z-10 select-none"
@@ -116,7 +116,7 @@ function StepCard({
                   loop
                   muted
                   playsInline
-                  className="absolute inset-0 w-full h-full object-cover object-bottom opacity-50 pointer-events-none"
+                  className="absolute inset-0 w-full h-full object-cover object-bottom opacity-60 pointer-events-none"
                 />
                 <span 
                   className="text-3xl tracking-tighter leading-none text-white relative z-10"
