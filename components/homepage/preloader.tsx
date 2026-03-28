@@ -64,7 +64,7 @@ export default function Preloader() {
             </div>
             
             {/* Small White Logo in Bottom Left */}
-            <div className="absolute bottom-5 left-5 w-10 h-10">
+            <div className="absolute bottom-5 left-5 w-12 h-12">
               <Image 
                 src="/whitelogo.png" 
                 alt="NexusDWeb Logo" 
