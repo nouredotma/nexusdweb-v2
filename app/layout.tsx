@@ -93,7 +93,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="loading">
+    <html lang="en" className="loading relative" data-scroll-behavior="smooth">
       <body className={`${urbanist.className} ${caveat.variable} antialiased relative`}>
         <script
           type="application/ld+json"

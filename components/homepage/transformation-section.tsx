@@ -190,7 +190,7 @@ export default function TransformationSection() {
         </div>
 
         {/* Stacking Cards */}
-        <div className="-mt-[86svh] pt-12 md:pt-14">
+        <div className="relative -mt-[86svh] pt-12 md:pt-14">
           {steps.map((step, index) => (
             <StepCard
               key={step.number}

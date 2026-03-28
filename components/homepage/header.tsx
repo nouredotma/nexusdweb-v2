@@ -39,7 +39,7 @@ export default function Header() {
   // Shared animation config to reduce duplication
   const commonAnimate = {
     boxShadow: visible ? HEADER_BOX_SHADOW : "none",
-    backgroundColor: visible ? "#FFFFFF" : "transparent",
+    backgroundColor: visible ? "#FFFFFF" : "rgba(255, 255, 255, 0)",
   }
 
   const desktopAnimate = {
@@ -118,7 +118,7 @@ export default function Header() {
         className={`relative z-60 mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-sm px-3.5 py-2.5 lg:flex`}
       >
         <Link href="/" className="relative z-20 mr-4 flex items-center px-2 py-1">
-          <Image src="/coloredlogo.png" alt="Nexusdweb" width={120} height={32} className="h-8 w-auto object-contain" />
+          <img src="/coloredlogo.png" alt="Nexusdweb" width={120} height={32} className="h-8 w-auto object-contain" />
         </Link>
 
         <div
@@ -190,13 +190,11 @@ export default function Header() {
       <motion.div
         animate={mobileAnimate}
         transition={HEADER_TRANSITION}
-        className={`relative z-50 mx-auto flex w-full flex-col items-center justify-between rounded-xs px-0 py-2 lg:hidden ${
-          visible ? "bg-white/80" : "bg-transparent"
-        }`}
+        className={`relative z-50 mx-auto flex w-full flex-col items-center justify-between rounded-xs px-0 py-2 lg:hidden`}
       >
         <div className="flex w-full flex-row items-center justify-between">
           <Link href="/" className={`flex items-center relative transition-all duration-300 ${mobileMenuOpen ? "z-70" : "z-20"}`}>
-            <Image src="/coloredlogo.png" alt="Nexusdweb" width={120} height={32} className="h-8 w-auto object-contain" />
+            <img src="/coloredlogo.png" alt="Nexusdweb" width={120} height={32} className="h-8 w-auto object-contain" />
           </Link>
 
           <div className="flex items-center gap-2">
