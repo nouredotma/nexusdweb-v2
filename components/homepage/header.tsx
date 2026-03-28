@@ -50,9 +50,9 @@ export default function Header() {
 
   const mobileAnimate = {
     ...commonAnimate,
-    width: visible ? "94%" : "95%",
-    paddingRight: visible ? "12px" : "16px",
-    paddingLeft: visible ? "12px" : "16px",
+    width: visible ? "94%" : "99%",
+    paddingRight: visible ? "6px" : "6px",
+    paddingLeft: visible ? "10px" : "10px",
     y: visible ? 20 : 0,
   }
 

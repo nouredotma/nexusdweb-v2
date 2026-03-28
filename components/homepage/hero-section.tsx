@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { AnimatedArrow } from "@/components/ui/animated-arrow"
-import { Bot } from "lucide-react"
+import { NexusRobotIcon } from "@/components/ui/nexus-robot-icon"
 import { AiAssistantModal } from "@/components/homepage/ai-assistant-modal"
 
 import {
@@ -131,8 +131,8 @@ export default function HeroSection() {
                   <div className="absolute inset-[2.5px] bg-white rounded-xs md:rounded-md z-0" />
                 </div>
 
-                <div className="relative z-10 text-black">
-                  <Bot className="w-7 h-7 md:w-8 md:h-8" />
+                <div className="relative z-10">
+                  <NexusRobotIcon className="w-8 h-8 md:w-10 md:h-10" />
                 </div>
               </motion.button>
             </TooltipTrigger>

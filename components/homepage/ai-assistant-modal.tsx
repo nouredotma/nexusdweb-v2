@@ -3,7 +3,8 @@
 import React, { useState, useRef, useEffect, useCallback, memo } from "react";
 import type { CSSProperties } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Bot, Mic, MicOff, ArrowUp } from "lucide-react";
+import { X, Mic, MicOff, ArrowUp, ChevronRight } from "lucide-react";
+import { NexusRobotIcon } from "@/components/ui/nexus-robot-icon";
 import { useLenis } from "lenis/react";
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogPortal, DialogOverlay } from "@/components/ui/dialog";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
@@ -201,6 +202,23 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
     };
   }, [open, lenis]);
 
+  // Mobile back button closes the modal instead of navigating away
+  useEffect(() => {
+    if (!open) return;
+    window.history.pushState({ aiModal: true }, "");
+    const handlePopState = () => {
+      onOpenChange(false);
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+      // Clean up the history entry if modal was closed normally (not via back button)
+      if (window.history.state?.aiModal) {
+        window.history.back();
+      }
+    };
+  }, [open, onOpenChange]);
+
   const messagesRef = useRef<Message[]>(messages);
   useEffect(() => {
     messagesRef.current = messages;
@@ -290,8 +308,10 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
         <DialogOverlay className="z-10000 bg-black/70!" />
         <DialogContent
           className={cn(
-            "bg-white! border-none! outline-none! text-gray-900 p-0 gap-0 overflow-hidden transition-all duration-300 ease-in-out [&>button]:hidden flex flex-col rounded-lg",
-            "max-w-6xl! h-[85vh] z-10001"
+            "bg-white! border-none! outline-none! text-gray-900 p-0 gap-0 overflow-hidden transition-all duration-300 ease-in-out [&>button]:hidden flex flex-col",
+            "w-screen! h-dvh! max-w-[100vw]! max-h-dvh! rounded-none!",
+            "md:max-w-6xl! md:h-[85vh]! md:max-h-[85vh]! md:rounded-lg!",
+            "z-10001"
           )}
         >
           <VisuallyHidden.Root>
@@ -300,8 +320,9 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
           </VisuallyHidden.Root>
 
           {/* Header */}
-          <div className="bg-gray-100 px-4 py-2 flex items-center justify-between shrink-0 z-10 border-b border-gray-200">
-            <div className="flex items-center gap-2">
+          <div className="bg-gray-100 px-3 py-2 md:px-4 flex items-center justify-between shrink-0 z-10 border-b border-gray-200">
+            {/* Desktop: macOS-style traffic lights */}
+            <div className="hidden md:flex items-center gap-2">
               <button
                 onClick={() => onOpenChange(false)}
                 className="w-4 h-4 bg-[#ff5f57] border border-black/5 rounded-full flex items-center justify-center hover:bg-[#ff5f57]/90 transition-colors cursor-pointer"
@@ -309,39 +330,54 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
               >
                 <X className="w-2 h-2 text-white" strokeWidth={3} />
               </button>
-              {/* Only the close button remains */}
               <div className="w-4 h-4 bg-[#ffbd2e]/50 border border-black/5 rounded-full" />
               <div className="w-4 h-4 bg-[#28c840]/50 border border-black/5 rounded-full" />
             </div>
             
-            <div className="flex-1 mx-4 bg-gray-200 rounded-md h-5 max-w-md flex items-center justify-center">
+            {/* Mobile: title on the left */}
+            <div className="flex md:hidden items-center gap-2">
+              <span className="text-xs font-semibold text-gray-700">Nexus AI</span>
+            </div>
+            
+            {/* Desktop: center title bar */}
+            <div className="hidden md:flex flex-1 mx-4 bg-gray-200 rounded-md h-5 max-w-md items-center justify-center">
               <span className="text-[10px] font-medium text-gray-500 uppercase tracking-widest">Nexus AI — NexusDWeb</span>
             </div>
 
-            <div className="w-10 flex justify-end">
-              <Bot className="w-4 h-4 text-gray-400" />
+            {/* Desktop: robot icon */}
+            <div className="hidden md:flex w-10 justify-end">
+              <NexusRobotIcon className="w-4 h-4" animated={false} />
             </div>
+            
+            {/* Mobile: close button (plain arrow) */}
+            <button
+              onClick={() => onOpenChange(false)}
+              className="flex md:hidden items-center justify-center cursor-pointer p-1"
+              aria-label="Close"
+            >
+              <ChevronRight className="w-5 h-5 text-gray-500" strokeWidth={2} />
+            </button>
           </div>
 
           {/* Chat area */}
           <div className="flex flex-col flex-1 min-h-0 bg-white">
             {!hasStartedChat ? (
-              <div className="flex-1 overflow-y-auto ai-chat-scrollbar p-6 flex flex-col" data-lenis-prevent>
+              <div className="flex-1 overflow-y-auto ai-chat-scrollbar p-3 md:p-6 flex flex-col" data-lenis-prevent>
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="w-full m-auto flex flex-col items-center max-w-6xl px-4"
+                  className="w-full m-auto flex flex-col items-center max-w-6xl px-2 md:px-4"
                   >
                     <motion.h3 
                       layoutId="chat-title"
-                      className="font-semibold text-gray-900 mb-8 text-center text-3xl"
+                      className="font-semibold text-gray-900 mb-4 md:mb-8 text-center text-xl md:text-3xl"
                     >
                       Hey! I'm Nexus 👋 <br className="hidden sm:block" /> Ask me about NexusDWeb
                     </motion.h3>
                     
-                    <div className="w-full mb-6 max-w-3xl px-4">
+                    <div className="w-full mb-4 md:mb-6 max-w-3xl px-2 md:px-4">
                       {/* Box shadow removed as per instructions */}
-                      <div className="relative flex items-center gap-2 bg-neutral-50 rounded-full p-2 pl-3 border border-neutral-200">
+                      <div className="relative flex items-center gap-1.5 md:gap-2 bg-neutral-50 rounded-full p-1.5 pl-2.5 md:p-2 md:pl-3 border border-neutral-200">
                         <motion.button
                           type="button"
                           onClick={toggleRecording}
@@ -364,7 +400,7 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
                           onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void handleSend(); } }}
                           placeholder="Ask me anything..."
                           rows={1}
-                          className="flex-1 bg-transparent border-0 ring-0 focus:ring-0 outline-none focus:outline-none text-gray-900 placeholder:text-gray-400 py-2.5 resize-none text-[15px] leading-relaxed max-h-[150px] min-h-[24px]"
+                          className="flex-1 bg-transparent border-0 ring-0 focus:ring-0 outline-none focus:outline-none text-gray-900 placeholder:text-gray-400 py-2 md:py-2.5 resize-none text-[13px] md:text-[15px] leading-relaxed max-h-[120px] md:max-h-[150px] min-h-[24px]"
                         />
                         <div className="shrink-0 mb-1 mr-1">
                           <motion.button onClick={() => void handleSend()} disabled={!input.trim()} whileTap={input.trim() ? { scale: 0.95 } : {}} className={cn("h-9 w-9 rounded-full flex items-center justify-center transition-all duration-200", input.trim() ? "bg-[#226fd3] text-white cursor-pointer" : "bg-gray-200 text-gray-400 cursor-not-allowed")} aria-label="Send message">
@@ -374,9 +410,9 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap justify-center gap-2 w-full max-w-6xl px-4">
+                    <div className="flex flex-row flex-wrap justify-center gap-1.5 md:gap-2 w-full max-w-6xl px-2 md:px-4">
                       {SUGGESTED_QUESTIONS.map((question, idx) => (
-                        <motion.button key={idx} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1 + idx * 0.1 }} onClick={() => setInput(question)} className="px-4 py-2 rounded-full border border-gray-200 text-gray-500 text-sm hover:border-[#226fd3] hover:text-[#226fd3] transition-all bg-white cursor-pointer">
+                        <motion.button key={idx} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1 + idx * 0.1 }} onClick={() => setInput(question)} className="px-2.5 py-1 md:px-4 md:py-2 rounded-full border border-gray-200 text-gray-500 text-[11px] md:text-sm hover:border-[#226fd3] hover:text-[#226fd3] transition-all bg-white cursor-pointer whitespace-nowrap">
                           {question}
                         </motion.button>
                       ))}
@@ -387,13 +423,13 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
               <div className="flex-1 overflow-y-auto ai-chat-scrollbar" ref={scrollRef} data-lenis-prevent>
                 <div className="flex flex-col pb-4">
                   {messages.map((message) => (
-                    <div key={message.id} className="px-4 py-6 w-full text-base">
-                      <div className="mx-auto flex gap-4 max-w-5xl px-4">
+                    <div key={message.id} className="px-3 py-3 md:px-4 md:py-6 w-full text-sm md:text-base">
+                      <div className="mx-auto flex gap-2 md:gap-4 max-w-5xl px-2 md:px-4">
                         <div className={cn("relative flex-1 overflow-hidden leading-7", message.type === "user" && "max-w-[85%] ml-auto flex justify-end")}>
                           {message.type === "user" ? (
-                            <div className="bg-[#226fd3] px-5 py-2.5 rounded-3xl text-white">{message.content}</div>
+                            <div className="bg-[#226fd3] px-3.5 py-2 md:px-5 md:py-2.5 rounded-3xl text-white text-sm md:text-base">{message.content}</div>
                           ) : (
-                            <div className="text-gray-700 pt-1">
+                            <div className="text-gray-700 pt-1 text-sm md:text-base leading-relaxed">
                               {message.isNew ? <TypingText text={message.content} onComplete={() => setMessages((prev) => prev.map((m) => m.id === message.id ? { ...m, isNew: false } : m))} /> : formatBotMessage(message.content)}
                             </div>
                           )}
@@ -402,8 +438,8 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
                     </div>
                   ))}
                   {isTyping && (
-                    <div className="px-4 py-6 w-full">
-                      <div className="mx-auto flex gap-4 max-w-5xl px-4">
+                    <div className="px-3 py-3 md:px-4 md:py-6 w-full">
+                      <div className="mx-auto flex gap-2 md:gap-4 max-w-5xl px-2 md:px-4">
                         <div className="pt-2">
                           <div className="flex gap-1">
                             <div className="w-2 h-2 rounded-full bg-[#226fd3] animate-bounce" style={{ animationDelay: "0ms" } as CSSProperties} />
@@ -419,13 +455,13 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
             )}
 
             {hasStartedChat && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="px-4 py-1 shrink-0 bg-linear-to-t from-white via-white to-transparent">
-                <div className="mx-auto max-w-5xl px-4">
-                  <div className="relative flex items-center gap-2 bg-neutral-50 rounded-full p-2 pl-3 border border-neutral-200">
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="px-3 py-1 md:px-4 shrink-0 bg-linear-to-t from-white via-white to-transparent">
+                <div className="mx-auto max-w-5xl px-2 md:px-4">
+                  <div className="relative flex items-center gap-1.5 md:gap-2 bg-neutral-50 rounded-full p-1.5 pl-2.5 md:p-2 md:pl-3 border border-neutral-200">
                     <motion.button type="button" onClick={toggleRecording} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className={cn("w-9 h-9 flex items-center justify-center transition-colors shrink-0 rounded-full cursor-pointer", isRecording ? "bg-red-500 text-white animate-pulse" : "text-gray-400 hover:text-gray-600")} aria-label={isRecording ? "Stop recording" : "Start recording"}>
                       {isRecording ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
                     </motion.button>
-                    <textarea ref={textareaRef} value={input} onChange={handleTextareaChange} onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void handleSend(); } }} placeholder="Continue the conversation..." rows={1} className="flex-1 bg-transparent border-0 ring-0 focus:ring-0 outline-none focus:outline-none text-gray-900 placeholder:text-gray-400 py-2.5 resize-none text-[15px] leading-relaxed max-h-[150px] min-h-[24px]" />
+                    <textarea ref={textareaRef} value={input} onChange={handleTextareaChange} onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void handleSend(); } }} placeholder="Continue the conversation..." rows={1} className="flex-1 bg-transparent border-0 ring-0 focus:ring-0 outline-none focus:outline-none text-gray-900 placeholder:text-gray-400 py-2 md:py-2.5 resize-none text-[13px] md:text-[15px] leading-relaxed max-h-[120px] md:max-h-[150px] min-h-[24px]" />
                     <div className="shrink-0 mb-1 mr-1">
                       <motion.button onClick={() => void handleSend()} disabled={!input.trim()} whileTap={input.trim() ? { scale: 0.95 } : {}} className={cn("h-9 w-9 rounded-full flex items-center justify-center transition-all duration-200", input.trim() ? "bg-[#226fd3] text-white cursor-pointer" : "bg-gray-200 text-gray-400 cursor-not-allowed")} aria-label="Send message">
                         <ArrowUp className="h-4 w-4" />
