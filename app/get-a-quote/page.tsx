@@ -18,12 +18,12 @@ export default function GetAQuotePage() {
         <div className="absolute inset-0 bg-grid-black/[0.02] -z-0" />
         
         <div className="relative z-10 max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 items-start">
             
             {/* Left side: Information / Copy */}
-            <div className="flex flex-col justify-center max-w-xl">
-              <div className="inline-flex mb-4 px-3 py-1.5 rounded-full bg-black/5 border border-black/10 w-fit">
-                <span className="text-xs md:text-sm font-semibold text-black">Let's Talk</span>
+            <div className="flex flex-col justify-start max-w-xl lg:sticky lg:top-40">
+              <div className="inline-flex mb-4 px-3 py-1.5 rounded-full bg-primary/5 border border-primary w-fit">
+                <span className="text-xs md:text-sm font-semibold text-primary">Let's Talk</span>
               </div>
               
               <h1 className="text-xl md:text-5xl font-bold mb-6 text-black tracking-tight leading-[1.1]">

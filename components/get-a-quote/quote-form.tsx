@@ -6,13 +6,22 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { AnimatedArrow } from "@/components/ui/animated-arrow"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 export default function QuoteForm() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
+    phone: "",
     company: "",
+    service: "",
     message: ""
   })
 
@@ -21,14 +30,20 @@ export default function QuoteForm() {
     setFormData(prev => ({ ...prev, [id]: value }))
   }
 
+  const handleServiceChange = (value: string) => {
+    setFormData(prev => ({ ...prev, service: value }))
+  }
+
   const handleWhatsAppClick = () => {
-    const { firstName, lastName, email, company, message } = formData
+    const { firstName, lastName, email, phone, company, service, message } = formData
     
     // Construct the structured message
     const text = `*New Project Inquiry from Get a Quote Form*%0A%0A` +
       `*Name:* ${firstName} ${lastName}%0A` +
+      `*Email:* ${email}%0A` +
+      `*Phone:* ${phone || "Not specified"}%0A` +
       `*Company:* ${company || "Not specified"}%0A` +
-      `*Email:* ${email}%0A%0A` +
+      `*Service Inquiry:* ${service || "Not specified"}%0A%0A` +
       `*Project Details:*%0A${message || "No details provided."}`
     
     const whatsappUrl = `https://wa.me/212660715095?text=${text}`
@@ -36,70 +51,101 @@ export default function QuoteForm() {
   }
 
   return (
-    <div className="bg-white border-2 border-neutral-200 rounded-sm md:rounded-xl px-2 py-4 md:py-6 md:px-6">
+    <div className="bg-white border-2 border-neutral-200 rounded-sm md:rounded-xl px-2 py-4 md:py-6 md:px-8">
       <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
           <div className="flex flex-col gap-2">
-            <Label htmlFor="firstName" className="font-semibold px-1 text-xs md:text-sm">First Name</Label>
+            <Label htmlFor="firstName" className="font-semibold px-2 text-xs md:text-sm">First Name</Label>
             <Input 
               id="firstName" 
               placeholder="John" 
               value={formData.firstName}
               onChange={handleChange}
-              className="bg-slate-50 border-slate-200 h-11 md:h-12 rounded-full focus-visible:ring-primary/20 focus-visible:ring-4 focus-visible:border-primary px-6 text-sm"
+              className="bg-neutral-50 border-neutral-200 h-11 md:h-12 rounded-full focus-visible:ring-primary/20 focus-visible:ring-4 focus-visible:border-primary px-6 text-sm"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="lastName" className="font-semibold px-1 text-xs md:text-sm">Last Name</Label>
+            <Label htmlFor="lastName" className="font-semibold px-2 text-xs md:text-sm">Last Name</Label>
             <Input 
               id="lastName" 
               placeholder="Doe" 
               value={formData.lastName}
               onChange={handleChange}
-              className="bg-slate-50 border-slate-200 h-11 md:h-12 rounded-full focus-visible:ring-primary/20 focus-visible:ring-4 focus-visible:border-primary px-6 text-sm"
+              className="bg-neutral-50 border-neutral-200 h-11 md:h-12 rounded-full focus-visible:ring-primary/20 focus-visible:ring-4 focus-visible:border-primary px-6 text-sm"
             />
           </div>
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label htmlFor="email" className="font-semibold px-1 text-xs md:text-sm">Work Email</Label>
+          <Label htmlFor="email" className="font-semibold px-2 text-xs md:text-sm">Email Address</Label>
           <Input 
             id="email" 
             type="email" 
-            placeholder="john@company.com" 
+            placeholder="john@example.com" 
             value={formData.email}
             onChange={handleChange}
-            className="bg-slate-50 border-slate-200 h-11 md:h-12 rounded-full focus-visible:ring-primary/20 focus-visible:ring-4 focus-visible:border-primary px-6 text-sm"
+            className="bg-neutral-50 border-neutral-200 h-11 md:h-12 rounded-full focus-visible:ring-primary/20 focus-visible:ring-4 focus-visible:border-primary px-6 text-sm"
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label htmlFor="company" className="font-semibold px-1 text-xs md:text-sm">Company Name</Label>
+          <Label htmlFor="phone" className="font-semibold px-2 text-xs md:text-sm">Phone Number (WhatsApp available)</Label>
+          <Input 
+            id="phone" 
+            type="tel" 
+            placeholder="+1 234 567 890" 
+            value={formData.phone}
+            onChange={handleChange}
+            className="bg-neutral-50 border-neutral-200 h-11 md:h-12 rounded-full focus-visible:ring-primary/20 focus-visible:ring-4 focus-visible:border-primary px-6 text-sm"
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="company" className="font-semibold px-2 text-xs md:text-sm">Company Name</Label>
           <Input 
             id="company" 
             placeholder="Acme Corp" 
             value={formData.company}
             onChange={handleChange}
-            className="bg-slate-50 border-slate-200 h-11 md:h-12 rounded-full focus-visible:ring-primary/20 focus-visible:ring-4 focus-visible:border-primary px-6 text-sm"
+            className="bg-neutral-50 border-neutral-200 h-11 md:h-12 rounded-full focus-visible:ring-primary/20 focus-visible:ring-4 focus-visible:border-primary px-6 text-sm"
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label htmlFor="message" className="font-semibold px-1 text-xs md:text-sm">Project Details</Label>
+          <Label htmlFor="service" className="font-semibold px-2 text-xs md:text-sm">Service you are interested in</Label>
+          <Select onValueChange={handleServiceChange}>
+            <SelectTrigger className="bg-neutral-50 border-neutral-200 h-11 md:h-12 rounded-full cursor-pointer focus-visible:ring-primary/20 focus-visible:ring-4 focus-visible:border-primary px-6 text-sm w-full text-left transition-all duration-300">
+              <SelectValue placeholder="Select a service" />
+            </SelectTrigger>
+            <SelectContent className="rounded-lg border-neutral-200 shadow-xl bg-white">
+              <SelectItem value="Web Development">Web Development</SelectItem>
+              <SelectItem value="UI/UX Design">UI/UX Design</SelectItem>
+              <SelectItem value="AI Solutions & Automation">AI Solutions & Automation</SelectItem>
+              <SelectItem value="Digital Transformation">Digital Transformation</SelectItem>
+              <SelectItem value="Digital Marketing">Digital Marketing</SelectItem>
+              <SelectItem value="E-commerce Solutions">E-commerce Solutions</SelectItem>
+              <SelectItem value="Branding & Identity">Branding & Identity</SelectItem>
+              <SelectItem value="Other">Other</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="flex flex-col gap-2 md:mt-1">
+          <Label htmlFor="message" className="font-semibold px-2 text-xs md:text-sm">Project Details</Label>
           <Textarea 
             id="message" 
             placeholder="Tell us about your goals, timeline, and budget..." 
             value={formData.message}
             onChange={handleChange}
-            className="bg-slate-50 border-slate-200 min-h-[140px] rounded-[24px] resize-none focus-visible:ring-primary/20 focus-visible:ring-4 focus-visible:border-primary px-6 py-4 text-sm"
+            className="bg-neutral-50 border-neutral-200 min-h-[140px] rounded-[24px] resize-none focus-visible:ring-primary/20 focus-visible:ring-4 focus-visible:border-primary px-6 py-5 text-sm"
           />
         </div>
 
-        <div className="flex flex-row gap-2 mt-2 w-full">
+        <div className="flex flex-row gap-2 mt-4 w-full">
           <Button 
             type="submit" 
             size="lg" 
-            className="flex-7 bg-black hover:bg-black/90 text-white font-bold rounded-full h-12 md:h-14 px-3 md:px-4 text-xs md:text-base flex items-center justify-between transition-all duration-300 group whitespace-nowrap cursor-pointer text-left"
+            className="flex-7 bg-black hover:bg-black/90 text-white font-bold rounded-full h-12 md:h-14 px-3 md:px-4 text-[11px] md:text-base flex items-center justify-between transition-all duration-300 group whitespace-nowrap cursor-pointer text-left"
           >
             Send Message
             <AnimatedArrow wrapperClassName="bg-white shrink-0 ml-1 md:ml-2" arrowClassName="text-black" />
@@ -119,7 +165,7 @@ export default function QuoteForm() {
           </button>
         </div>
         
-        <p className="text-xs text-center text-muted-foreground mt-2 px-4">
+        <p className="text-[10px] md:text-xs text-center text-muted-foreground mt-2 px-4">
           By submitting this form, you agree to our privacy policy and terms of service.
         </p>
       </form>
