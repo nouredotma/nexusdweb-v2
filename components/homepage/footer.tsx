@@ -104,28 +104,24 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
-                >
+                <div className="text-white/40 pointer-events-none font-medium flex items-center gap-0 cursor-not-allowed">
                   <ChevronRight size={14} className="-ml-1" />
                   <span>Blog</span>
-                </a>
+                  <span className="ml-2 text-[10px] uppercase tracking-tighter opacity-50 border border-white/20 px-1 rounded-sm">Soon</span>
+                </div>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="text-white/70 hover:text-white transition font-medium flex items-center gap-0"
-                >
+                <div className="text-white/40 pointer-events-none font-medium flex items-center gap-0 cursor-not-allowed">
                   <ChevronRight size={14} className="-ml-1" />
                   <span>Help Center</span>
-                </a>
+                  <span className="ml-2 text-[10px] uppercase tracking-tighter opacity-50 border border-white/20 px-1 rounded-sm">Soon</span>
+                </div>
               </li>
             </ul>
           </div>
 
           {/* Column 3 – Legal */}
-          <div>
+          <div className="opacity-40 pointer-events-none select-none">
             <h4 className="font-bold text-white uppercase text-sm tracking-wider mb-5">
               Legal
             </h4>
@@ -161,7 +157,7 @@ export default function Footer() {
           </div>
 
           {/* Column 4 – Connect */}
-          <div>
+          <div className="opacity-40 pointer-events-none select-none">
             <h4 className="font-bold text-white uppercase text-sm tracking-wider mb-5">
               Connect
             </h4>
@@ -246,7 +242,7 @@ export default function Footer() {
             © {new Date().getFullYear()} NexusDWeb. All rights reserved.
           </p>
           <div className="items-center gap-2 text-sm text-white/70 hidden md:inline-flex">
-            <span className="w-2 h-2 bg-emerald-400 rounded-full inline-block animate-pulse" />
+            <span className="w-2 h-2 bg-green-400 rounded-full inline-block animate-pulse" />
             <span>All Systems Operational</span>
           </div>
         </div>
