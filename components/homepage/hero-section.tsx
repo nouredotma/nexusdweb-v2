@@ -25,11 +25,11 @@ export default function HeroSection() {
 
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-2 md:px-6 lg:px-8 text-center">
-          <div className="inline-block mb-4 px-3 py-1 rounded-full bg-neutral-100">
-            <span className="text-xs md:text-sm font-bold text-neutral-500">Digital experiences reimagined</span>
+          <div className="inline-flex mb-2 px-3 py-1.5 rounded-full bg-black">
+            <span className="text-[10px] md:text-sm font-bold shiny-sweep">Digital Experience Reimagined</span>
           </div>
 
-          <h1 className="text-4xl md:text-7xl font-bold mb-3 text-balance text-black px-2 md:px-0 tracking-tight">
+          <h1 className="text-3xl md:text-7xl font-bold mb-3 text-black px-2 md:px-0 tracking-tight">
             Where visionaries{" "}
             <span className="inline-flex -space-x-3 -translate-x-2">
               <img
@@ -73,7 +73,7 @@ export default function HeroSection() {
             .
           </h1>
 
-          <p className="text-sm md:text-xl font-medium text-black/50 mb-8 text-balance max-w-2xl mx-auto">
+          <p className="text-xs md:text-xl font-medium text-muted-foreground mb-8 max-w-2xl mx-auto">
             We partner with ambitious individuals and teams to craft stunning websites, powerful platforms, and smart growth strategies.
           </p>
 

@@ -287,7 +287,7 @@ function AiAssistantModalComponent({ open, onOpenChange }: AiAssistantModalProps
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogPortal>
-        <DialogOverlay className="z-10000" />
+        <DialogOverlay className="z-10000 bg-black/70!" />
         <DialogContent
           className={cn(
             "bg-white! border-none! outline-none! text-gray-900 p-0 gap-0 overflow-hidden transition-all duration-300 ease-in-out [&>button]:hidden flex flex-col rounded-lg",
