@@ -12,7 +12,7 @@ export default function PriceSection() {
   const TIERS: (PricingTier & { limitations: string[] })[] = [
     {
       name: t.pricing.tiers.starter.name,
-      price: 500,
+      price: t.pricing.tiers.enterprise.price,
       description: t.pricing.tiers.starter.description,
       features: t.pricing.tiers.starter.features,
       limitations: t.pricing.tiers.starter.limitations,
@@ -23,7 +23,7 @@ export default function PriceSection() {
     },
     {
       name: t.pricing.tiers.professional.name,
-      price: 800,
+      price: t.pricing.tiers.enterprise.price,
       description: t.pricing.tiers.professional.description,
       features: t.pricing.tiers.professional.features,
       limitations: t.pricing.tiers.professional.limitations,
